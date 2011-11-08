@@ -55,7 +55,7 @@ class Server < Sinatra::Base
       db = Mongo::Connection.new.db('fingerprints')
       collection = db.collection('fingerprints')
       
-      response.body = collection.find().to_a.map { |doc|  doc.to_json }
+      response.body = collection.find().to_a.to_json
       response.finish
     else
       File.read(File.join('public', 'dataset.htm'))
