@@ -66,7 +66,7 @@ class Server < Sinatra::Base
   get '/count' do
     db = Mongo::Connection.new.db('fingerprints')
     collection = db.collection('fingerprints')
-    response.body = collection.find().count()
+    response.body = [collection.count().to_s]
     response.finish
   end
 
