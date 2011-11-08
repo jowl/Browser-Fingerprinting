@@ -58,6 +58,10 @@ class Server < Sinatra::Base
 
   end
   
+  get '/test' do
+    File.read(File.join('public', 'test.html'))
+  end
+
   # Generate random UID /[a-z0-9]{12}/
   def random_uid()
     return (1..12).reduce('') { |uid,_| uid + (rand 36).to_s(36) }
