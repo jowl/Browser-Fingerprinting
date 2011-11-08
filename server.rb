@@ -63,6 +63,13 @@ class Server < Sinatra::Base
 
   end
 
+  get '/count' do
+    db = Mongo::Connection.new.db('fingerprints')
+    collection = db.collection('fingerprints')
+    response.body = collection.find().count()
+    response.finish
+  end
+
   # Generate random UID /[a-z0-9]{12}/
   def random_uid()
     return (1..12).reduce('') { |uid,_| uid + (rand 36).to_s(36) }

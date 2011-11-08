@@ -43,6 +43,8 @@ $(function()
 
     // Flash is used to retreive list of fonts
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
+
+    $.get('/count',function(data) { $('#count').text(thousands(data)); });
     
 });
 
@@ -156,4 +158,12 @@ function display_obj(obj)
     }
 
     return elem;
+}
+
+/*
+ * Insert thousands separator in numeric string
+ */
+function thousands(i)
+{
+    return i.replace(/(\d+)(\d{3})/,function(old,a,b) { return thousands(a) + ',' + b; });
 }
