@@ -49,17 +49,18 @@ class Server < Sinatra::Base
     
   end
 
-  get '/dataset' do
-    db = Mongo::Connection.new.db('fingerprints')
-    collection = db.collection('fingerprints')
+  # Get dataset
+  get %r{/dataset(.json)?} do |json|
+    if json
+      db = Mongo::Connection.new.db('fingerprints')
+      collection = db.collection('fingerprints')
+      
+      response.body = collection.find().to_a.map { |doc|  doc.to_json }
+      response.finish
+    else
+      File.read(File.join('public', 'dataset.htm'))
+    end
 
-    response.body = collection.find().to_a.map { |doc|  doc.to_json }
-    response.finish
-
-  end
-  
-  get '/test' do
-    File.read(File.join('public', 'test.html'))
   end
 
   # Generate random UID /[a-z0-9]{12}/
