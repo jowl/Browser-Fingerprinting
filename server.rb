@@ -5,17 +5,22 @@ require 'json'
 require 'mongo'
 require 'active_support/all'
 require 'sinatra/base'
+require './lang.rb'
 
 class Server < Sinatra::Base
 
   # Get index.htm
   get %r{/(en|sv)?$} do |lang|
-    if lang == 'sv'
-      File.read(File.join('public', 'index_sv.htm'))
-    else
-      File.read(File.join('public', 'index.htm'))
-    end
+    @language = lang
+    @translations = Lang.getLang(lang)
+    erb :index
+#    if lang == 'sv'
+#      File.read(File.join('public', 'index_sv.htm'))
+#    else
+#      File.read(File.join('public', 'index.htm'))
+#    end
   end
+  
   
   # Post fingerprint
   post '/post' do 
