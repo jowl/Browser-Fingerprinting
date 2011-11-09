@@ -5,6 +5,7 @@ require 'json'
 require 'mongo'
 require 'active_support/all'
 require 'sinatra/base'
+require 'json-schema'
 require './lang.rb'
 
 class Server < Sinatra::Base
@@ -32,25 +33,28 @@ class Server < Sinatra::Base
     
     # Read and parse post data
     fingerprint = JSON.parse request.body.read.to_s
+
+    if JSON::Validator.validate!('schema.json',fingerprint.to_json)
     
-    # Get and set cookie w/ uid
-    cookie_value = request.cookies['fingerprint']
-    cookie_value ||= random_uid
-    response.set_cookie('fingerprint',{ :value => cookie_value,:expires => 3.months.from_now})
-    fingerprint['uid'] = cookie_value
-    
-    # Get info from request
-    fingerprint['ip'] = request.ip
-    fingerprint['accepts'] = request.accept
-    
-    # Insert fingerprint to DB
-    db = Mongo::Connection.new.db('fingerprints')
-    collection = db.collection('fingerprints')
-    collection.insert(fingerprint)
-    
-    # Respond to client
-    response.body = ['Thank you for your data, please come back again in a day or two.']
-    response.finish
+      # Get and set cookie w/ uid
+      cookie_value = request.cookies['fingerprint']
+      cookie_value ||= random_uid
+      response.set_cookie('fingerprint',{ :value => cookie_value,:expires => 3.months.from_now})
+      fingerprint['uid'] = cookie_value
+      
+      # Get info from request
+      fingerprint['ip'] = request.ip
+      fingerprint['accepts'] = request.accept
+      
+      # Insert fingerprint to DB
+      db = Mongo::Connection.new.db('fingerprints')
+      collection = db.collection('fingerprints')
+      collection.insert(fingerprint)
+      
+      # Respond to client
+      response.body = ['Thank you for your data, please come back again in a day or two.']
+      response.finish
+    end
     
   end
 

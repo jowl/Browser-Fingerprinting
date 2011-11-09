@@ -1,0 +1,14 @@
+{
+    "type" : "object",
+    "properties" : 
+    {
+        "useragent"       : { "type" : "string",  "required" : true },
+        "resolution"      : { "type" : "object",  "required" : true },
+        "mime_types"      : { "type" : "array",   "required" : true },
+        "timezone"        : { "type" : "integer", "required" : true },
+        "cookies_enabled" : { "type" : "boolean", "required" : true },
+        "fonts"           : { "type" : "array",   "required" : true },
+        "timestamp"       : { "type" : "integer", "required" : true }
+    },
+    "additionalProperties" : false
+}
