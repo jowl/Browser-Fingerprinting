@@ -1,0 +1,130 @@
+/* TOC ***********************************************************************/
+/* - General                                                                 */
+/* - Containers                                                              */
+/* - Buttons                                                                 */
+/* - Fingerprint                                                             */
+/* - Colors                                                                  */
+/*****************************************************************************/
+
+
+/* General *******************************************************************/
+
+* 
+{ 
+    font-size: 16px;  
+    font-family: "Helvetica Neue", Arial, sans-serif; 
+    color: #4c4c4c;
+}
+
+body { background-color: #f0f0f0; text-align: center; overflow-y: scroll; }
+
+h1 { font-size: 1.5em; font-weight: bold; text-align: center; }
+p { width: 50%; text-align: justify; margin: 1em auto; }
+a { color: #007cc3; }
+
+/*****************************************************************************/
+
+/* Containers ****************************************************************/
+
+#content
+{
+    border-radius: 0.5em;
+    background-color: #fff;
+    width: 80%;
+    margin: auto;
+    padding: 1em 0.5em;
+}
+
+#response { font-size: 1.25em; margin: 1em; }
+
+#fingerprint 
+{ 
+    margin-top: 2em; 
+    width: 100%; 
+    padding: 0px; 
+    display: none; 
+    height: 100%; 
+}
+
+#count { font-size: 8em; text-align: center; }
+
+/* Buttons *******************************************************************/
+
+button
+{ 
+    font-weight: normal;
+    font-size: 1.5em;
+    color: #fff;
+    border-radius: 3em; 
+    border-style: none;
+    margin: 1em 2em;
+    width: 6em;
+    height: 6em;
+    cursor: pointer;
+}
+
+.about
+{ 
+    background: -webkit-gradient(linear, left top, left bottom, from(#007cc3), to(#005ca3));
+}
+.about_hover
+{ 
+    background: -webkit-gradient(linear, left top, left bottom, from(#006cb3), to(#005ca3));
+}
+
+.submit
+{ 
+    background: -webkit-gradient(linear, left top, left bottom, from(#056b00), to(#004b00));
+}
+.submit_hover
+{ 
+    background: -webkit-gradient(linear, left top, left bottom, from(#025b00), to(#004b00));
+}
+
+.preview
+{ 
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff7e00), to(#cf4e00));
+}
+.preview_hover
+{ 
+    background: -webkit-gradient(linear, left top, left bottom, from(#df5e00), to(#cf4e00));
+}
+
+/*****************************************************************************/
+
+/* Fingerprint ***************************************************************/
+
+.obj 
+{ 
+    border-radius: 0.5em;
+    width: 80%;
+    padding: 0.5em;
+    background-color: #fff;
+}
+
+.obj .obj { background-color: rgba(0,124,195,0.10); }
+
+.obj ul { list-style-type: none; padding: 0; margin: 0; }
+.obj li { margin-top: 0.5em; }
+.obj th 
+{ 
+    font-weight: normal; 
+    vertical-align: top; 
+    text-align: right; 
+    color: #ff7e00; 
+}
+.obj td { width: 85%; padding-left:1em; }
+
+.value { font-style: italic; }
+.value a { font-style: normal; font-size: 0.75em; margin-left: 1em; }
+
+/*****************************************************************************/
+
+/* Colors ********************************************************************/
+
+.red    { color: #d31900; }
+.green  { color: #056b00; }
+.blue   { color: #007cc3; }
+.orange { color: #ff7e00; }
+
+/*****************************************************************************/
