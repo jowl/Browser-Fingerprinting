@@ -43,6 +43,8 @@ $(function()
 
     // Flash is used to retreive list of fonts
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
+
+    update_count();
     
 });
 
@@ -73,6 +75,7 @@ function submit()
 	    $('#response').addClass('green')
 		.text(data);
 	    setTimeout(function() { $('#response').fadeOut(500); },5000);
+	    update_count();
 	}
     });
 }
@@ -89,6 +92,7 @@ function preview(hide)
 	$('#fingerprint').fadeOut(500);
 	$('body').animate({ scrollTop: 0 },500,function(){
 	    $('.preview').text('Preview');});
+	$('#count').show();
     }
     else
     {
@@ -102,6 +106,7 @@ function preview(hide)
 	    scrollTop: $("#fingerprint").offset().top
 	}, 500);
 	$('.preview').text('Hide');
+	$('#count').hide();
     }
 }
 
@@ -156,4 +161,17 @@ function display_obj(obj)
     }
 
     return elem;
+}
+
+function update_count()
+{
+    $.get('/count',function(data) { $('#count').text(thousands(data)); });
+}
+
+/*
+ * Insert thousands separator in numeric string
+ */
+function thousands(i)
+{
+    return i.replace(/(\d+)(\d{3})/,function(old,a,b) { return thousands(a) + ',' + b; });
 }
