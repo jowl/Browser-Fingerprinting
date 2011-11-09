@@ -1,13 +1,14 @@
 var fingerprint = 
 {
     useragent : "",
-    resolution : "",
+    resolution : {},
     mime_types : [],
     timezone : null,
     cookies_enabled : null,
     fonts : [],
-    timestamp : new Date()
+    timestamp : new Date().getTime()
 }
+
 
 /* 
  * Run when entire DOM is loaded
@@ -45,6 +46,8 @@ $(function()
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
 
     update_count();
+
+    $.get('url',function(data) { lang = $.parseJSON(data); } );
     
 });
 
@@ -56,15 +59,14 @@ function populateFontList(fontArr){ fingerprint.fonts = fontArr; }
  */
 function submit()
 {
-    $.ajax('/post', {
+    $.ajax('/posasast', {
         type: 'POST',
         data: JSON.stringify(fingerprint),
         contentType: 'text/json',
 	error: function (x,s,error){
 	    preview(true);
 	    $('#response').addClass('red')
-		.text('An error occurred! We are sorry for the inconvenience, '+
-		      'please try again later!');
+		.text(window.translations['submit_error']);
 	    setTimeout(function() { $('#response').fadeOut(500); },5000);
 	},
         success: function (data,s,x){
@@ -91,7 +93,7 @@ function preview(hide)
     {
 	$('#fingerprint').fadeOut(500);
 	$('body').animate({ scrollTop: 0 },500,function(){
-	    $('.preview').text('Preview');});
+	    $('.preview').text(window.translations['button_preview']);});
 	$('#count').show();
     }
     else
@@ -99,13 +101,13 @@ function preview(hide)
 	$('#fingerprint').children().remove('table.obj');
 	$('#fingerprint').prepend(
 	    display_obj(fingerprint).css({margin : 'auto' })
-		.prepend('<tr><td colspan=2><h1>Your Fingerprint</h1></td></tr>')
+		.prepend('<tr><td colspan=2><h1>'+window.translations['your_fingerprint']+'</h1></td></tr>')
 		.css( {paddingTop : '1em'})).fadeIn(500);
 	
 	$('body').animate({
 	    scrollTop: $("#fingerprint").offset().top
 	}, 500);
-	$('.preview').text('Hide');
+	$('.preview').text(window.translations['button_hide']);
 	$('#count').hide();
     }
 }
