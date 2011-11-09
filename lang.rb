@@ -28,7 +28,7 @@ module Lang
 	circumstances share it with others.
       </p>",
          'button_about' => "About",
-         'button_preview' => "Preview data",
+         'button_preview' => "Preview",
          'button_submit' => "Submit",
          'your_fingerprint' => "Your fingerprint",
          'submit_error'     => 'An error occurred! We are sorry for the inconvenience, please try again later!',
