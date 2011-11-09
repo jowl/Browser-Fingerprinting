@@ -55,7 +55,17 @@ class Server < Sinatra::Base
       db = Mongo::Connection.new.db('fingerprints')
       collection = db.collection('fingerprints')
       
-      response.body = collection.find().to_a.to_json
+      response.body = collection.find().to_a.map { |f| 
+        { 'useragent' => f['useragent'],
+          'ip' => f['ip'],
+          'fonts' => f['fonts'].count,
+          'mime_types' => f['mime_types'].count,
+          'resolution' => f['resolution']['width']*f['resolution']['height']*f['resolution']['color_depth'],
+          'timezone' => f['timezone'],
+          'uid' => f['uid']
+        }
+      }.to_json
+          
       response.finish
     else
       File.read(File.join('public', 'dataset.htm'))

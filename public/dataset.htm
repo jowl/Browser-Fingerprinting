@@ -5,10 +5,26 @@
     <script src="/jquery-1.6.4.min.js" type="text/javascript"></script>
     <script src="/dataset.js" type="text/javascript"></script>
     <title>Browser Fingerprinting</title>
+    <style type="text/css">
+      #dataset th { font-weight: normal; color: #ff7e00; border-bottom: 1px solid #ff7e03; }
+      #dataset th.label { color: #007cc3; }
+      #dataset td, #dataset th { border-left: 1px solid #ff7e00; padding: 0.5em; text-align: center; margin-left: -1px; }
+      
+    </style>
     <link rel="stylesheet" type="text/css" href="/style.css" />
   </head>
 <body>
-  <button onclick="get_dataset()" class="preview">Fetch</button>
-  <div id="dataset" class="obj" style="margin:auto"></div>
+  <button onclick="get_dataset()" class="preview">Reload</button>
+  <table id="dataset" style="margin:auto" cellspacing=0>
+    <tr class="heading">
+      <th>User&nbsp;agent</th>
+      <th>IP</th>
+      <th>#Fonts</th>
+      <th>#Mime&#8209;Types</th>
+      <th>Resolution</th>
+      <th>Time&nbsp;zone</th>
+      <th class="label">Label</th>
+    </tr>
+  </table>
 </body>
 </html>
