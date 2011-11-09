@@ -75,7 +75,7 @@ function submit()
 	    $('#response').addClass('green')
 		.text(data);
 	    setTimeout(function() { $('#response').fadeOut(500); },5000);
-	    update_counter();
+	    update_count();
 	}
     });
 }
