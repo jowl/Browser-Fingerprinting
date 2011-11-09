@@ -67,7 +67,7 @@ class Server < Sinatra::Base
           'mime_types' => f['mime_types'].count,
           'resolution' => f['resolution']['width']*f['resolution']['height']*f['resolution']['color_depth'],
           'timezone' => f['timezone'],
-          'timestamp' => f['timestamp']
+          'timestamp' => f['timestamp'],
           'uid' => f['uid']
         }
       }.to_json
