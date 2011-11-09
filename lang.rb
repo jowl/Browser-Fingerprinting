@@ -61,7 +61,7 @@ module Lang
       </p>",
          'button_about' => "Om projektet",
          'button_preview' => "Granska data",
-         'button_submit' => "Skicka in<br>&nbsp;",
+         'button_submit' => "Skicka in data",
          'your_fingerprint' => "Ditt fingeravtryck",
          'submit_error'     => 'Ett fel inträffade! Vi ber om ursäkt för detta, var vänlig och försök igen senare!',
          'thankyou_msg'   => 'Tack för din medverkan, kom gärna tillbaka igen om en dag eller två.'
