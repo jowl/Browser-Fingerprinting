@@ -47,7 +47,6 @@ $(function()
 
     update_count();
 
-    $.get('url',function(data) { lang = $.parseJSON(data); } );
     
 });
 
@@ -59,7 +58,7 @@ function populateFontList(fontArr){ fingerprint.fonts = fontArr; }
  */
 function submit()
 {
-    $.ajax('/posasast', {
+    $.ajax('/post', {
         type: 'POST',
         data: JSON.stringify(fingerprint),
         contentType: 'text/json',
@@ -75,7 +74,7 @@ function submit()
 	    });
 	    preview(true);
 	    $('#response').addClass('green')
-		.text(data);
+		.text(window.translations['thankyou_msg']);
 	    setTimeout(function() { $('#response').fadeOut(500); },5000);
 	    update_count();
 	}

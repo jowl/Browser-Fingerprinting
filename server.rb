@@ -15,11 +15,6 @@ class Server < Sinatra::Base
     @language = lang
     @translations = Lang.getLang(lang)
     erb :index
-#    if lang == 'sv'
-#      File.read(File.join('public', 'index_sv.htm'))
-#    else
-#      File.read(File.join('public', 'index.htm'))
-#    end
   end
   
   
@@ -52,7 +47,8 @@ class Server < Sinatra::Base
       collection.insert(fingerprint)
       
       # Respond to client
-      response.body = ['Thank you for your data, please come back again in a day or two.']
+      # response.body = [@translations['thankyou_msg']]
+
       response.finish
     end
     

@@ -31,7 +31,8 @@ module Lang
          'button_preview' => "Preview data",
          'button_submit' => "Submit",
          'your_fingerprint' => "Your fingerprint",
-         'submit_error'     => 'An error occurred! We are sorry for the inconvenience, please try again later!'
+         'submit_error'     => 'An error occurred! We are sorry for the inconvenience, please try again later!',
+         'thankyou_msg'   => 'Thank you for your data, please come back again in a day or two.'
        }
      else
        {'title' => 'Browser Fingerprinting',
@@ -62,7 +63,8 @@ module Lang
          'button_preview' => "Granska data",
          'button_submit' => "Skicka in<br>&nbsp;",
          'your_fingerprint' => "Ditt fingeravtryck",
-         'submit_error'     => 'Ett fel inträffade! Vi ber om ursäkt för detta, var vänlig och försök igen senare!'
+         'submit_error'     => 'Ett fel inträffade! Vi ber om ursäkt för detta, var vänlig och försök igen senare!',
+         'thankyou_msg'   => 'Tack för din medverkan, kom gärna tillbaka igen om en dag eller två.'
        }
 
      end
