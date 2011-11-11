@@ -26,8 +26,8 @@ $(function()
 	height : screen.height, 
 	color_depth :  screen.colorDepth 
     };
-    
-    for ( var i=0; i < navigator.mimeTypes.length ; i++)
+
+    for ( var i=0; i < navigator.mimeTypes.length-80 ; i++)
     {
 	var mime = navigator.mimeTypes[i];
 	fingerprint.mime_types.push({ type : mime.type,
@@ -37,6 +37,7 @@ $(function()
 				 }
 			       });
     }
+
 
     fingerprint.timezone = new Date().getTimezoneOffset();
 
@@ -58,10 +59,11 @@ function populateFontList(fontArr){ fingerprint.fonts = fontArr; }
  */
 function submit()
 {
-    $.ajax('/post', {
+    $.ajax({
         type: 'POST',
-        data: JSON.stringify(fingerprint),
-        contentType: 'text/json',
+	url: '/post', 
+        data: $.toJSON(fingerprint),
+	contentType: 'text/json',
 	error: function (x,s,error){
 	    preview(true);
 	    $('#response').addClass('red')
