@@ -44,9 +44,6 @@ class Server < Sinatra::Base
       collection = db.collection('fingerprints')
       collection.insert(fingerprint)
       
-      # Respond to client
-      # response.body = [@translations['thankyou_msg']]
-
       response.finish
     end
     
