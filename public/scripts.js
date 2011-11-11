@@ -15,9 +15,6 @@ var fingerprint =
  */
 $(function()
 {
-    $('.submit').hover(function(event){ $(this).toggleClass('submit_hover'); });
-    $('.about').hover(function(event){ $(this).toggleClass('about_hover'); });
-    $('.preview').hover(function(event){ $(this).toggleClass('preview_hover'); });
 
     fingerprint.useragent = navigator.userAgent;
 

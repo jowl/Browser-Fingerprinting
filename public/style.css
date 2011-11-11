@@ -53,41 +53,61 @@ a { color: #007cc3; }
 button
 { 
     font-weight: normal;
-    font-size: 1.5em;
-    color: #fff;
-    border-radius: 3em; 
-    border-style: none;
+    font-size: 14px;
+    color: white;
+    border-radius: 0.5em;  
     margin: 1em 2em;
-    width: 6em;
-    height: 6em;
+    width: 130px;
+    height: 40px;
+    border-width: 1px; border-style: outset;
     cursor: pointer;
 }
 
 .about
 { 
+    background: #007cc3; 
+    border-color: #108cd3;
     background: -webkit-gradient(linear, left top, left bottom, from(#007cc3), to(#005ca3));
+    background: -moz-linear-gradient(top,  #007cc3,  #005ca3);   
 }
-.about_hover
+.about:hover
 { 
-    background: -webkit-gradient(linear, left top, left bottom, from(#006cb3), to(#005ca3));
+    background: #108cd3; 
+}
+.about:active
+{ 
+    background: #0076ba; 
 }
 
 .submit
 { 
+    background: #056b00;
+    border-color: #157b10;
     background: -webkit-gradient(linear, left top, left bottom, from(#056b00), to(#004b00));
+    background: -moz-linear-gradient(top,  #056b00,  #004b00); 
 }
-.submit_hover
+.submit:hover
 { 
-    background: -webkit-gradient(linear, left top, left bottom, from(#025b00), to(#004b00));
+    background: #157b10;
+}
+.submit:active{
+    background: #005b00;
 }
 
 .preview
 { 
+    background: #ff7e00; 
+    border-color: #ff8e10;
     background: -webkit-gradient(linear, left top, left bottom, from(#ff7e00), to(#cf4e00));
+    background: -moz-linear-gradient(top,  #ff7e00,  #cf4e00); 
 }
-.preview_hover
+.preview:hover
 { 
-    background: -webkit-gradient(linear, left top, left bottom, from(#df5e00), to(#cf4e00));
+    background: #ff8e10; 
+}
+.preview:active
+{ 
+    background: #ef6e00; 
 }
 
 /*****************************************************************************/
