@@ -4,8 +4,8 @@ module Lang
      if lang == 'en' 
        {'title' => 'Browser Fingerprinting',
          'title_info' => "<p>
-	The purpose of this web page is to collect data from web browsers, which
-	will be used in our Master's Thesis project. The goal of the project is
+	This webpage is part of a Master's Thesis project, with the purpose of 
+        collecting data from web browsers. The goal of the project is
 	to develop a method for determining the uniqueness of browsers, without
 	using intrusive methods such as cookies. We will attempt to do this by
 	looking at information about your browser, such as screen resolution,
@@ -16,15 +16,18 @@ module Lang
       <p>
 	We would greatly appreciate if you would take the time to share your
 	data with us by clicking the <span class=\"green\">Submit</span> button
-	below. If you're interested in what type of data we're interested in,
-	you can see your <i>fingerprint</i> by clicking
+	below. If you're interested in what type of data we're interested in 
+        and are collecting, you can see your <i>fingerprint</i> by clicking
 	the <span class=\"orange\">Preview</span> button.
       </p>
       <p>
 	Upon clicking <span class=\"green\">Submit</span>, you agree to sharing
 	your <i>fingerprint</i> with us and letting us store it for research
-	purposes. We will be VERY careful with your data, and under no
-	circumstances share it with others.
+	purposes in out thesis work. No data will, under any circumstances, 
+        be used for commercial purposes nor shared with others.
+      </p>
+      <p>
+        This webpage is not affiliated in any way with Burt Corp.
       </p>",
          'switch_language'  => "<a href=\"/sv\">På svenska</a>",
          'button_about'     => "About",
@@ -37,8 +40,8 @@ module Lang
      else
        {'title' => 'Browser Fingerprinting',
          'title_info' => "<p>
-	Syftet med denna webbsida är att samla in data från webbläsare för vårt
-	exjobb. Syftet med projektet är att utveckla en metod för att avgöra om
+	Denna webbsida är en del av ett exjobb och dess syfte är att samla in data 
+        från webbläsare. Målet med projektet är att utveckla en metod för att avgöra om
 	en webbläsare är unik, utan att använda inkräktande metoder såsom
 	kakor. Vi försöker göra detta genom att enbart titta på information om
 	din webbläsare, såsom skärmupplösning, installerade typsnitt,
@@ -49,15 +52,18 @@ module Lang
       <p>
 	Vi hoppas att du kan ta dig tid att dela med dig av ditt fingeravtryck
 	till oss, genom att klicka på knappen <span class=\"green\">Skicka in</span>
-	nedan. Om du är intresserad av att se vilken information du delar med
-	dig kan du klicka på knappen <span class=\"orange\">Granska data</span>.
+	nedan. Om du är intresserad av att se vilken information vi är intresserade 
+        av och samlar in kan du klicka på knappen 
+        <span class=\"orange\">Granska data</span>.
       </p>
       <p>
 	När du klickar på <span class=\"green\">Skicka in</span> godkänner
 	du att vi sparar ditt <i>fingeravtryck</i> för att använda i vår
-	forskning. Vi kommer att vara MYCKET försiktiga med din data och inte,
-	under några som helst förutsättningar, dela med oss av den till
-	utomstående.
+	forskning. Din data kommer inte, under några som helst omständigheter,
+        att användas för kommersiella syften eller delas med utomstående.
+      </p>
+      <p>
+        Denna webbsida är inte kopplad till Burt AB på något sätt.
       </p>",
          'switch_language'  => "<a href=\"/en\">In english</a>",
          'button_about'     => "Om projektet",

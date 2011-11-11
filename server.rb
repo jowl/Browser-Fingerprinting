@@ -22,12 +22,10 @@ class Server < Sinatra::Base
   post '/post' do 
     
     # TODO: 
-    # - validation of POST data 
-    # - protection against CSRF
     # - post more info to client, e.g. how many fingerprints etc. ?
     
     # Read and parse post data
-    fingerprint = JSON.parse request.body.read.to_s
+    fingerprint = JSON.parse request.body.read
 
     if JSON::Validator.validate!('schema.json',fingerprint.to_json)
     
@@ -46,9 +44,6 @@ class Server < Sinatra::Base
       collection = db.collection('fingerprints')
       collection.insert(fingerprint)
       
-      # Respond to client
-      # response.body = [@translations['thankyou_msg']]
-
       response.finish
     end
     
