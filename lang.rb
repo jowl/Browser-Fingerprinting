@@ -3,7 +3,6 @@ module Lang
    def Lang.getLang(lang)
      if lang == 'en' 
        {'title' => 'Browser Fingerprinting',
-
          'title_info' => "<p>
 	The purpose of this web page is to collect data from web browsers, which
 	will be used in our Master's Thesis project. The goal of the project is
@@ -27,12 +26,13 @@ module Lang
 	purposes. We will be VERY careful with your data, and under no
 	circumstances share it with others.
       </p>",
-         'button_about' => "About",
-         'button_preview' => "Preview",
-         'button_submit' => "Submit",
+         'switch_language'  => "<a href=\"/sv\">På svenska</a>",
+         'button_about'     => "About",
+         'button_preview'   => "Preview",
+         'button_submit'    => "Submit",
          'your_fingerprint' => "Your fingerprint",
          'submit_error'     => 'An error occurred! We are sorry for the inconvenience, please try again later!',
-         'thankyou_msg'   => 'Thank you for your data, please come back again in a day or two.'
+         'thankyou_msg'     => 'Thank you for your data, please come back again in a day or two.'
        }
      else
        {'title' => 'Browser Fingerprinting',
@@ -59,12 +59,13 @@ module Lang
 	under några som helst förutsättningar, dela med oss av den till
 	utomstående.
       </p>",
-         'button_about' => "Om projektet",
-         'button_preview' => "Granska data",
-         'button_submit' => "Skicka in data",
+         'switch_language'  => "<a href=\"/en\">In english</a>",
+         'button_about'     => "Om projektet",
+         'button_preview'   => "Granska data",
+         'button_submit'    => "Skicka in data",
          'your_fingerprint' => "Ditt fingeravtryck",
          'submit_error'     => 'Ett fel inträffade! Vi ber om ursäkt för detta, var vänlig och försök igen senare!',
-         'thankyou_msg'   => 'Tack för din medverkan, kom gärna tillbaka igen om en dag eller två.'
+         'thankyou_msg'     => 'Tack för din medverkan, kom gärna tillbaka igen om en dag eller två.'
        }
 
      end
