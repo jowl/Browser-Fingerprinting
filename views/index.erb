@@ -7,6 +7,8 @@
     <script src="/scripts.js" type="text/javascript"></script>
     <script type="text/javascript">
      translations = <%= @translations.to_json %>;
+     var tmp = <%= @fingerprint.to_json %>;
+     for (var i in tmp) fingerprint[i] = tmp[i];
     </script>
     <title><%= @translations['title'] %></title>
     <link rel="stylesheet" type="text/css" href="/style.css" />

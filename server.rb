@@ -6,17 +6,47 @@ require 'mongo'
 require 'active_support/all'
 require 'sinatra/base'
 require 'json-schema'
+require 'rack/accept'
 require './lang.rb'
 
 class Server < Sinatra::Base
 
+  use Rack::Accept
+
   # Get index.htm
   get %r{/(en|sv)?$} do |lang|
+    @fingerprint = {}
+    cookie_value = request.cookies['fingerprint']
+    cookie_value ||= random_uid
+    @fingerprint['uid'] = cookie_value
+    @fingerprint['ip'] = request.ip
+    
+    accept = env['rack-accept.request']
+
+    @fingerprint['accept_language'] = []
+    for lang in accept.language.values
+      @fingerprint['accept_language'].push({'name' => lang,'qvalue' => accept.language.qvalue(lang)})
+    end 
+
+    @fingerprint['accept_charset'] = []
+    for charset in accept.charset.values
+      @fingerprint['accept_charset'].push({'name' => charset,'qvalue' => accept.charset.qvalue(charset)})
+    end 
+
+    @fingerprint['accept_encoding'] = []
+    for enc in accept.encoding.values
+      @fingerprint['accept_encoding'].push({'name' => enc,'qvalue' => accept.encoding.qvalue(enc)})
+    end 
+
+    @fingerprint['accept_mediatype'] = []
+    for typ in accept.media_type.values
+      @fingerprint['accept_mediatype'].push({'name' => typ,'qvalue' => accept.media_type.qvalue(typ)})
+    end 
+
     @language = lang
     @translations = Lang.getLang(lang)
     erb :index
   end
-  
   
   # Post fingerprint
   post '/post' do 
@@ -29,16 +59,9 @@ class Server < Sinatra::Base
 
     if JSON::Validator.validate!('schema.json',fingerprint.to_json)
     
-      # Get and set cookie w/ uid
-      cookie_value = request.cookies['fingerprint']
-      cookie_value ||= random_uid
-      response.set_cookie('fingerprint',{ :value => cookie_value,:expires => 3.months.from_now})
-      fingerprint['uid'] = cookie_value
-      
-      # Get info from request
-      fingerprint['ip'] = request.ip
-      fingerprint['accepts'] = request.accept
-      
+      # Set new cookie w/ uid
+      response.set_cookie('fingerprint',{ :value => fingerprint['uid'],:expires => 3.months.from_now})
+        
       # Insert fingerprint to DB
       db = Mongo::Connection.new.db('fingerprints')
       collection = db.collection('fingerprints')

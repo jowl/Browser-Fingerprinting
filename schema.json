@@ -2,13 +2,19 @@
     "type" : "object",
     "properties" : 
     {
-        "useragent"       : { "type" : "string",  "required" : true },
-        "resolution"      : { "type" : "object",  "required" : true },
-        "mime_types"      : { "type" : "array",   "required" : true },
-        "timezone"        : { "type" : "integer", "required" : true },
-        "cookies_enabled" : { "type" : "boolean", "required" : true },
-        "fonts"           : { "type" : "array",   "required" : true },
-        "timestamp"       : { "type" : "integer", "required" : true }
+        "useragent"        : { "type" : "string",  "required" : true  },
+        "uid"              : { "type" : "string",  "required" : true  },
+        "ip"               : { "type" : "string",  "required" : true  },
+        "accept_language"  : { "type" : "array",   "required" : true  },
+        "accept_charset"   : { "type" : "array",   "required" : true  },
+        "accept_encoding"  : { "type" : "array",   "required" : true  },
+        "accept_mediatype" : { "type" : "array",   "required" : true  },
+        "resolution"       : { "type" : "object",  "required" : true  },
+        "mime_types"       : { "type" : "array",   "required" : true  },
+        "timezone"         : { "type" : "integer", "required" : false },
+        "cookies_enabled"  : { "type" : "boolean", "required" : false },
+        "fonts"            : { "type" : "array",   "required" : true  },
+        "timestamp"        : { "type" : "integer", "required" : true  }
     },
     "additionalProperties" : false
 }

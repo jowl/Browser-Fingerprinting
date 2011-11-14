@@ -1,12 +1,18 @@
 var fingerprint = 
 {
-    useragent : "",
-    resolution : {},
-    mime_types : [],
-    timezone : null,
-    cookies_enabled : null,
-    fonts : [],
-    timestamp : new Date().getTime()
+    useragent        : null,
+    ip               : null,
+    uid              : null,
+    resolution       : {},
+    mime_types       : [],
+    timezone         : null,
+    cookies_enabled  : null,
+    fonts            : [],
+    accept_language  : [],
+    accept_charset   : [],
+    accept_encoding  : [],
+    accept_mediatype : [],
+    timestamp        : new Date().getTime()
 }
 
 
@@ -56,6 +62,7 @@ function populateFontList(fontArr){ fingerprint.fonts = fontArr; }
  */
 function submit()
 {
+    fingerprint.timestamp = new Date().getTime();
     $.ajax({
         type: 'POST',
 	url: '/post', 
