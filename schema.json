@@ -2,7 +2,7 @@
     "type" : "object",
     "properties" : 
     {
-        "useragent"        : { "type" : "string",  "required" : true  },
+        "useragent"        : { "type" : "object",  "required" : true  },
         "uid"              : { "type" : "string",  "required" : true  },
         "ip"               : { "type" : "string",  "required" : true  },
         "accept_language"  : { "type" : "array",   "required" : true  },

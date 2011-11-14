@@ -22,7 +22,7 @@ var fingerprint =
 $(function()
 {
 
-    fingerprint.useragent = navigator.userAgent;
+    fingerprint.useragent.description = navigator.userAgent;
 
     fingerprint.resolution = { 
 	width : screen.width, 

@@ -8,6 +8,7 @@ require 'sinatra/base'
 require 'json-schema'
 require 'rack/accept'
 require './lang.rb'
+require 'net/http'
 
 class Server < Sinatra::Base
 
@@ -20,7 +21,12 @@ class Server < Sinatra::Base
     cookie_value ||= random_uid
     @fingerprint['uid'] = cookie_value
     @fingerprint['ip'] = request.ip
-    
+
+    agentString = URI.escape(request.user_agent)
+    uri = '/?uas=' + agentString + '&getJSON=all'
+    res = Net::HTTP.get_response('www.useragentstring.com',uri)
+    @fingerprint['useragent'] = JSON.parse(res.body)
+
     accept = env['rack-accept.request']
 
     @fingerprint['accept_language'] = []
@@ -79,7 +85,8 @@ class Server < Sinatra::Base
       collection = db.collection('fingerprints')
       
       response.body = collection.find().to_a.map { |f| 
-        { 'useragent' => f['useragent'],
+        { 'useragent_name' => f['useragent']['agent_name'],
+          'useragent_version' => f['useragent']['agent_version'],
           'ip' => f['ip'],
           'fonts' => f['fonts'].count,
           'mime_types' => f['mime_types'].count,
