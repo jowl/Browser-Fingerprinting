@@ -36,6 +36,7 @@ module Lang
          'button_about'         => "About",
          'button_preview'       => "Preview",
          'button_submit'        => "Submit",
+         'button_hide'          => "Hide",
          'your_fingerprint'     => "Your fingerprint",
          'submit_error'         => 'An error occurred! We are sorry for the inconvenience, please try again later!',
          'thankyou_msg'         => 'Thank you for your data, please come back again in a day or two.'
@@ -75,6 +76,7 @@ module Lang
          'button_about'        => "Om projektet",
          'button_preview'      => "Granska data",
          'button_submit'       => "Skicka in data",
+         'button_hide'         => "Dölj data",
          'your_fingerprint'    => "Ditt fingeravtryck",
          'submit_error'        => 'Ett fel inträffade! Vi ber om ursäkt för detta, var vänlig och försök igen senare!',
          'thankyou_msg'        => 'Tack för din medverkan, kom gärna tillbaka igen om en dag eller två.'
