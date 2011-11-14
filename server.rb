@@ -24,8 +24,8 @@ class Server < Sinatra::Base
     accept = env['rack-accept.request']
 
     @fingerprint['accept_language'] = []
-    for lang in accept.language.values
-      @fingerprint['accept_language'].push({'name' => lang,'qvalue' => accept.language.qvalue(lang)})
+    for language in accept.language.values
+      @fingerprint['accept_language'].push({'name' => language,'qvalue' => accept.language.qvalue(language)})
     end 
 
     @fingerprint['accept_charset'] = []

@@ -20,17 +20,20 @@
     <div id="content">
       <h1><%= @translations['title'] %></h1>
       <%= @translations['title_info'] %>
-      <%= @translations['switch_language'] %>
     </div>
 
-    <button class="about" onclick=""><%= @translations["button_about"] %></button>
+    <button class="about" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')">
+      <%= @translations["switch_language"] %>
+    </button>
     <button class="preview" onclick="preview()"><%= @translations["button_preview"] %></button>
     <button class="submit" onclick="submit()"><%= @translations["button_submit"] %></button>
 
     <div id="response"></div>
 
     <div id="fingerprint">
-      <button class="about" onclick=""><%= @translations["button_about"] %></button>
+      <button class="about" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')">
+	<%= @translations["switch_language"] %>
+      </button>
       <button class="preview" onclick="preview()"><%= @translations["button_preview"] %></button>
       <button class="submit" onclick="submit()"><%= @translations["button_submit"] %></button>
     </div>
