@@ -110,6 +110,29 @@ button.preview:active
     background-color: #ef6e00; 
 }
 
+.image {
+   position: relative;
+   width: 200px; /* for IE 6 */
+   float:left; /* optional */
+}
+.image a {
+    text-decoration: none;
+}
+.image .text {
+        position:absolute;
+	font-size: 16px;  
+	font-family: "Helvetica Neue", Arial, sans-serif; 
+	font-weight: normal;
+	font-size: 14px;
+	color: #fff;
+	text-align:center;
+	width: 136px;
+	height: 40px; 
+	cursor: pointer;
+	top:10px;  
+/*	left:10px;   */
+}
+
 /*****************************************************************************/
 
 /* Fingerprint ***************************************************************/
