@@ -112,7 +112,7 @@ function preview(hide)
 	$('body').animate({
 	    scrollTop: $("#fingerprint").offset().top
 	}, 500);
-	$('.preview').text(window.translations['button_hide']);
+//	$('.preview').text(window.translations['button_hide']);
 	$('#count').hide();
     }
 }

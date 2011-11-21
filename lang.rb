@@ -32,11 +32,10 @@ module Lang
         questions, please contact ferik(at)student.chalmers.se.
       </p>",
          'switch_language_url'  => "/sv",
-         'switch_language'      => "Svenska",
-         'button_about'         => "About",
-         'button_preview'       => "Preview",
-         'button_submit'        => "Submit",
-         'button_hide'          => "Hide",
+         'button_switch_language'      => "/img/translate_eng.png",
+         'button_preview'       => "/img/preview_eng.png",
+         'button_submit'        => "/img/submit_eng.png",
+         'button_hide'          => "/img/hide_eng.png",
          'your_fingerprint'     => "Your fingerprint",
          'submit_error'         => 'An error occurred! We are sorry for the inconvenience, please try again later!',
          'thankyou_msg'         => 'Thank you for your data, please come back again in a day or two.'
@@ -72,11 +71,10 @@ module Lang
         vänligen kontakta ferik(at)student.chalmers.se.
       </p>",
          'switch_language_url' => "/en",
-         'switch_language'     => "In English",
-         'button_about'        => "Om projektet",
-         'button_preview'      => "Granska data",
-         'button_submit'       => "Skicka in data",
-         'button_hide'         => "Dölj data",
+         'button_switch_language'      => "/img/translate_sv.png",
+         'button_preview'       => "/img/preview_sv.png",
+         'button_submit'        => "/img/submit_sv.png",
+         'button_hide'          => "/img/hide_sv.png",
          'your_fingerprint'    => "Ditt fingeravtryck",
          'submit_error'        => 'Ett fel inträffade! Vi ber om ursäkt för detta, var vänlig och försök igen senare!',
          'thankyou_msg'        => 'Tack för din medverkan, kom gärna tillbaka igen om en dag eller två.'
