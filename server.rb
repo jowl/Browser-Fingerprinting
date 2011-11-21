@@ -22,11 +22,17 @@ class Server < Sinatra::Base
     @fingerprint['uid'] = cookie_value
     @fingerprint['ip'] = request.ip
 
-    agentString = URI.escape(request.user_agent)
-    uri = '/?uas=' + agentString + '&getJSON=all'
-    res = Net::HTTP.get_response('www.useragentstring.com',uri)
-    @fingerprint['useragent'] = JSON.parse(res.body)
-
+    @fingerprint['useragent'] = {}
+    begin
+      agentString = URI.escape(request.user_agent)
+      uri = '/?uas=' + agentString + '&getJSON=all'
+      res = Net::HTTP.get_response('www.useragentstring.com',uri)
+      res.value
+      @fingerprint['useragent'] = JSON.parse(res.body)
+    rescue
+    ensure
+      @fingerprint['useragent']['description'] = request.user_agent
+    end
     accept = env['rack-accept.request']
 
     @fingerprint['accept_language'] = []
