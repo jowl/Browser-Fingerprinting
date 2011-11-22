@@ -75,7 +75,7 @@ function submit()
 	    setTimeout(function() { $('#response').fadeOut(500); },5000);
 	},
         success: function (data,s,x){
-	    $('.submit').fadeOut(500,function(){ 
+	    $('#submit_span').fadeOut(500,function(){ 
 		$(this).css('visibility','hidden').css('display','inline');
 	    });
 	    preview(true);

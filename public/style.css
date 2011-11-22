@@ -52,86 +52,10 @@ a { color: #007cc3; }
 
 button
 { 
-    font-weight: normal;
-    font-size: 14px;
-    color: white;
-    border-radius: 0.5em;  
-    margin: 1em 2em;
-    width: 130px;
-    height: 40px;
-    border-width: 1px; border-style: outset;
-    cursor: pointer;
+    padding-right:2em;
+    padding-top:1em;
 }
 
-button.about
-{ 
-    background-color: #007cc3; 
-    border-color: #108cd3;
-    background: -webkit-gradient(linear, left top, left bottom, from(#007cc3), to(#005ca3));
-    background: -moz-linear-gradient(top,  #007cc3,  #005ca3);   
-}
-button.about:hover
-{ 
-    background-color: #108cd3; 
-}
-button.about:active
-{ 
-    background-color: #0076ba; 
-}
-
-button.submit
-{ 
-    background-color: #056b00;
-    border-color: #157b10;
-    background: -webkit-gradient(linear, left top, left bottom, from(#056b00), to(#004b00));
-    background: -moz-linear-gradient(top,  #056b00,  #004b00); 
-}
-button.submit:hover
-{ 
-    background-color: #157b10;
-}
-button.submit:active{
-    background-color: #005b00;
-}
-
-button.preview
-{ 
-    background-color: #ff7e00; 
-    border-color: #ff8e10;
-    background: -webkit-gradient(linear, left top, left bottom, from(#ff7e00), to(#cf4e00));
-    background: -moz-linear-gradient(top,  #ff7e00,  #cf4e00); 
-}
-button.preview:hover
-{ 
-    background-color: #ff8e10; 
-}
-button.preview:active
-{ 
-    background-color: #ef6e00; 
-}
-
-.image {
-   position: relative;
-   width: 200px; /* for IE 6 */
-   float:left; /* optional */
-}
-.image a {
-    text-decoration: none;
-}
-.image .text {
-        position:absolute;
-	font-size: 16px;  
-	font-family: "Helvetica Neue", Arial, sans-serif; 
-	font-weight: normal;
-	font-size: 14px;
-	color: #fff;
-	text-align:center;
-	width: 136px;
-	height: 40px; 
-	cursor: pointer;
-	top:10px;  
-/*	left:10px;   */
-}
 
 /*****************************************************************************/
 
