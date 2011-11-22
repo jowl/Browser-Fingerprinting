@@ -30,7 +30,7 @@ $(function()
 	color_depth :  screen.colorDepth 
     };
 
-    for ( var i=0; i < navigator.mimeTypes.length-80 ; i++)
+    for ( var i=0; i < navigator.mimeTypes.length ; i++)
     {
 	var mime = navigator.mimeTypes[i];
 	fingerprint.mime_types.push({ type : mime.type,
