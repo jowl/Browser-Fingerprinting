@@ -22,27 +22,27 @@
       <%= @translations['title_info'] %>
     </div>
     
-    <span class="button">
-      <img src="<%= @translations['button_switch_language'] %>" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')" style="cursor:pointer">
+    <span>
+      <img class="button" src="<%= @translations['button_switch_language'] %>" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')">
     </span>
-    <span class="button">
-      <img src="<%= @translations['button_preview'] %>" onclick="preview()" style="cursor:pointer">
+    <span>
+      <img src="<%= @translations['button_preview'] %>" onclick="preview()" class="button">
     </span>
-    <span id="submit_span" class="button">
-      <img src="<%= @translations['button_submit'] %>" onclick="submit()" style="cursor:pointer">
+    <span id="submit_span">
+      <img src="<%= @translations['button_submit'] %>" onclick="submit()" class="button">
     </span>
 
     <div id="response"></div>
 
     <div id="fingerprint">
-      <span class="button">
-	<img src="<%= @translations['button_switch_language']%>" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')" style="cursor:pointer">
+      <span>
+	<img src="<%= @translations['button_switch_language']%>" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')" class="button">
       </span>
-      <span class="button">
-	<img src="<%= @translations['button_hide'] %>" onclick="preview()" style="cursor:pointer">
+      <span>
+	<img src="<%= @translations['button_hide'] %>" onclick="preview()" class="button">
       </span>
       <span id="submit_span">
-	<img src="<%= @translations['button_submit'] %>" onclick="submit()" style="cursor:pointer">
+	<img src="<%= @translations['button_submit'] %>" onclick="submit()" class="button">
       </span>
     </div>
 
