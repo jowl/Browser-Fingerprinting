@@ -51,8 +51,8 @@ a { color: #007cc3; }
 /* Buttons *******************************************************************/
 img.button
 { 
-    padding-right:2em;
-    padding-top:1em;
+    margin-right:2em;
+    margin-top:1em;
     cursor:pointer;
 }
 
