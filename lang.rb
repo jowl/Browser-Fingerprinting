@@ -56,7 +56,7 @@ module Lang
 	till oss, genom att klicka på knappen <span class=\"green\">Skicka in</span>
 	nedan. Om du är intresserad av att se vilken information vi är intresserade 
         av och samlar in kan du klicka på knappen 
-        <span class=\"orange\">Granska data</span>. Ett av värdena vi samlar in är 
+        <span class=\"orange\">Visa data</span>. Ett av värdena vi samlar in är 
         <i>Uid</i>, vilket är ett slumpmässigt genererat id som sätts i form av en 
         cookie för att vi ska kunna utveckla vår metod.
       </p>
