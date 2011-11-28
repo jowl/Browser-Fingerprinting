@@ -30,7 +30,7 @@ function addIEPlugin(plugObj) {
 	if (control) {
 	    isInstalled = true;
 	    version = control.versionInfo;
-	    fingerprint.plugin.push({'name' : plugObj.name,
+	    fingerprint.plugins.push({'name' : plugObj.name,
 				     'version' : version});
 	}
     } 
