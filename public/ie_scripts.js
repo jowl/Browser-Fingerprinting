@@ -94,12 +94,7 @@ $(function()
              }
 	     minorVersion--;
 	     return majorVersion + '.' + minorVersion;
-        }
-        else {
-            alert("No Silverlight is installed");
-        }
-	     
-	 }
+         }
 	},
 	{name: 'MSXML',
 	 ids: ["MSXML2.DOMDocument.6.0", "MSXML2.DOMDocument.5.0", "MSXML2.DOMDocument.4.0", "MSXML2.DOMDocument.3.0"],
