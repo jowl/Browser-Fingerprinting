@@ -1,13 +1,15 @@
 $(get_dataset);
 
+
 function get_dataset()
 {
-    var fields = [ 'useragent_name', 'useragent_version', 'ip', 'fonts' , 'mime_types' ,'resolution',  'timezone', 'timestamp', 'uid' ];
+    var fields = [ 'useragent_name', 'useragent_version', 'ip', 'fonts' , 'mime_types' , 'plugins', 'resolution',  'timezone', 'timestamp', 'uid' ];
 
     $.get('/dataset.json', function(data){
         var fingerprints = $.parseJSON(data);
 	var old = $('#dataset>tr:not(.heading)');
 	if ( old.length > 0 ) old.remove();
+	
 	for ( var i in fingerprints )
 	{
 	    var fingerprint = fingerprints[i];

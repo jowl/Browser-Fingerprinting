@@ -85,15 +85,20 @@ $(function()
 	 getVersion: function(obj, progid) {
 	     var majorVersion = '1';
 	     var minorVersion = '0';
-	     while (Silverlight.IsVersionSupported(majorVersion '.' + minorVersion)) {
+	     var minorMinorVersion = '0';
+	     while (obj.IsVersionSupported(majorVersion + '.' + minorVersion + '.' + minorMinorVersion)) {
 		 majorVersion++;
              }
 	     majorVersion--;
-	     while (Silverlight.IsVersionSupported(majorVersion '.' + minorVersion)) {
+	     while (obj.IsVersionSupported(majorVersion + '.' + minorVersion + '.' + minorMinorVersion)) {
 		 minorVersion++;
              }
 	     minorVersion--;
-	     return majorVersion + '.' + minorVersion;
+	     while (obj.IsVersionSupported(majorVersion + '.' + minorVersion + '.' + minorMinorVersion)) {
+		 minorMinorVersion++;
+             }
+	     minorMinorVersion--;
+	     return majorVersion + '.' + minorVersion + '.' +minorMinorVersion;
          }
 	},
 	{name: 'MSXML',

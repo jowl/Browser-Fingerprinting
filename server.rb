@@ -91,16 +91,21 @@ class Server < Sinatra::Base
       collection = db.collection('fingerprints')
       
       response.body = collection.find().to_a.map { |f| 
-        { 'useragent_name' => f['useragent']['agent_name'],
+        tmp = { 'useragent_name' => f['useragent']['agent_name'],
           'useragent_version' => f['useragent']['agent_version'],
           'ip' => f['ip'],
           'fonts' => f['fonts'].count,
-          'plugins' => f['plugins'].count,
           'resolution' => f['resolution']['width']*f['resolution']['height']*f['resolution']['color_depth'],
           'timezone' => f['timezone'],
           'timestamp' => f['timestamp'],
           'uid' => f['uid']
         }
+        if f['mime_types'] != nil 
+          tmp['plugins'] = f['mime_types'].count
+        else
+          tmp['plugins'] = f['plugins'].count
+        end
+        tmp
       }.to_json
           
       response.finish
