@@ -24,7 +24,7 @@ function addIEPlugin(plugObj) {
     if (window.ActiveXObject) {
 	var i = 0;
 	control = null;
-	while (control == null) {
+	while ((control == null) && (i < plugObj.ids.length)) {
 	    try {
 		control = new ActiveXObject(plugObj.ids[i]);
 	    } catch (e) {
