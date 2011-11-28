@@ -69,18 +69,18 @@ class Server < Sinatra::Base
     # Read and parse post data
     fingerprint = JSON.parse request.body.read
 
-    if JSON::Validator.validate!('schema.json',fingerprint.to_json)
+#    if JSON::Validator.validate!('schema.json',fingerprint.to_json)
     
-      # Set new cookie w/ uid
-      response.set_cookie('fingerprint',{ :value => fingerprint['uid'],:expires => 3.months.from_now})
-        
-      # Insert fingerprint to DB
-      db = Mongo::Connection.new.db('fingerprints')
-      collection = db.collection('fingerprints')
-      collection.insert(fingerprint)
-      
-      response.finish
-    end
+    # Set new cookie w/ uid
+    response.set_cookie('fingerprint',{ :value => fingerprint['uid'],:expires => 3.months.from_now})
+    
+    # Insert fingerprint to DB
+    db = Mongo::Connection.new.db('fingerprints')
+    collection = db.collection('fingerprints')
+    collection.insert(fingerprint)
+    
+    response.finish
+#    end
     
   end
 
@@ -95,7 +95,7 @@ class Server < Sinatra::Base
           'useragent_version' => f['useragent']['agent_version'],
           'ip' => f['ip'],
           'fonts' => f['fonts'].count,
-          'mime_types' => f['mime_types'].count,
+          'plugins' => f['plugins'].count,
           'resolution' => f['resolution']['width']*f['resolution']['height']*f['resolution']['color_depth'],
           'timezone' => f['timezone'],
           'timestamp' => f['timestamp'],

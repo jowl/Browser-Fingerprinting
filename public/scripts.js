@@ -4,7 +4,7 @@ var fingerprint =
     ip               : null,
     uid              : null,
     resolution       : {},
-    mime_types       : [],
+    plugins          : [],
     timezone         : null,
     cookies_enabled  : null,
     fonts            : [],
@@ -30,7 +30,7 @@ $(function()
 	color_depth :  screen.colorDepth 
     };
 
-    for ( var i=0; i < navigator.mimeTypes.length ; i++)
+/*    for ( var i=0; i < navigator.mimeTypes.length ; i++)
     {
 	var mime = navigator.mimeTypes[i];
 	fingerprint.mime_types.push({ type : mime.type,
@@ -39,6 +39,18 @@ $(function()
 				     description : mime.enabledPlugin.description
 				 }
 			       });
+    } */
+
+    for ( var i= 0; i < navigator.plugins.length; i++) {
+	var plugin = navigator.plugins[i];
+	var mime_types = [];
+	for ( var j=0; j < plugin.length; j++) {
+	    mime_types.push(plugin.item(j).type);
+	}
+	fingerprint.plugins.push({'name' : plugin.name,
+				  'version' : plugin.version,
+				  'description' : plugin.description,
+				  'mime_types' : mime_types});
     }
 
 

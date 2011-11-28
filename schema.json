@@ -10,7 +10,7 @@
         "accept_encoding"  : { "type" : "array",   "required" : true  },
         "accept_mediatype" : { "type" : "array",   "required" : true  },
         "resolution"       : { "type" : "object",  "required" : true  },
-        "mime_types"       : { "type" : "array",   "required" : true  },
+        "plugins"          : { "type" : "array",   "required" : true  },
         "timezone"         : { "type" : "integer", "required" : false },
         "cookies_enabled"  : { "type" : "boolean", "required" : false },
         "fonts"            : { "type" : "array",   "required" : true  },
