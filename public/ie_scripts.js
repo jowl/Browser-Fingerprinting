@@ -19,6 +19,24 @@ var fingerprint =
 /* 
  * Run when entire DOM is loaded
  */
+
+function addIEPlugin(plugObj) {
+    if (window.ActiveXObject) {
+	var control = null;
+	try {
+	    control = new ActiveXObject(plugObj.id);
+	} catch (e) {
+	}
+	if (control) {
+	    isInstalled = true;
+	    version = control.versionInfo;
+	    fingerprint.plugin.push({'name' : plugObj.name,
+				     'version' : version});
+	}
+    } 
+}
+
+
 $(function()
 {
 
@@ -30,35 +48,12 @@ $(function()
 	color_depth :  screen.colorDepth 
     };
 
-/*    for ( var i= 0; i < navigator.plugins.length; i++) {
-	var plugin = navigator.plugins[i];
-	var mime_types = [];
-	for ( var j=0; j < plugin.length; j++) {
-	    mime_types.push(plugin.item(j).type);
-	}
-	fingerprint.plugins.push({'name' : plugin.name,
-				  'version' : plugin.version,
-				  'description' : plugin.description,
-				  'mime_types' : mime_types});
-    } */
-
-
-
-    var isInstalled = false;
-    var version = null;
-    if (window.ActiveXObject) {
-	var control = null;
-	try {
-	    control = new ActiveXObject('WMPlayer.OCX');
-	} catch (e) {
-	    return;
-	}
-	if (control) {
-	    isInstalled = true;
-	    version = parseFloat(control.versionInfo);
-	    fingerprint.plugin.push({'name' : 'Windows Media Player',
-				     'version' : version});
-	}
+    var iePlugins = [{'name' : 'Windows Media Player', 'id' : 'WMPlayer.OCX'},
+		     {'name' : 'Adobe Reader', 'id' : 'PDF.PdfCtrl'}
+		    ];
+    
+    for (var i = 0; i < iePlugins.length; i++) {
+	addIEPlugin(iePlugins[i]);
     }
 
     fingerprint.timezone = new Date().getTimezoneOffset();
