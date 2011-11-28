@@ -39,6 +39,12 @@ function addIEPlugin(plugObj) {
     } 
 }
 
+function loopMatch(control, vers, idx, inc) {
+    while(IsSupported(control, vers)){
+        vers[idx]+=inc;
+    }
+    vers[idx] -= inc;
+}
 
 $(function()
 {
@@ -70,7 +76,7 @@ $(function()
 	},
 	{name: 'Adobe SVG',
 	 ids: ["Adobe.SVGCtl"],
-	 getVersion: function(obj, progid) {return obj.getSVGViewerVersion().replace(/[a-zA-Z; ]*([0-9.]+)/, "$1")};
+	 getVersion: function(obj, progid) {return obj.getSVGViewerVersion().replace(/[a-zA-Z; ]*([0-9.]+)/, "$1")}
 	},
 	{name: 'Windows Media Player',
 	 ids: ["WMPlayer.OCX", "MediaPlayer.MediaPlayer.1"],
@@ -82,7 +88,17 @@ $(function()
 	},
 	{name: 'WPFe (Silverlight)',
 	 ids: ["AgControl.AgControl"],
-	 getVersion: function(obj, progid) {return obj.settings.version}
+	 getVersion: function(obj, progid) {
+	     var vers = Array(1, 0, 0, 0);
+             loopMatch(control, vers, 0, 1);
+             loopMatch(control, vers, 1, 1);
+             loopMatch(control, vers, 2, 10000);
+             loopMatch(control, vers, 2, 1000);
+             loopMatch(control, vers, 2, 100);
+             loopMatch(control, vers, 2, 10);
+             loopMatch(control, vers, 2, 1);
+             loopMatch(control, vers, 3, 1);
+             return vers.toString();
 	},
 	{name: 'MSXML',
 	 ids: ["MSXML2.DOMDocument.6.0", "MSXML2.DOMDocument.5.0", "MSXML2.DOMDocument.4.0", "MSXML2.DOMDocument.3.0"],
