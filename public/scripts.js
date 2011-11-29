@@ -52,17 +52,17 @@ $(function()
     // Flash is used to retreive list of fonts
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
 
-    calcClockDiff();
+    getRTT();
 
     update_count();
     
 });
 
-function calcClockDiff(){
+function getRTT(){
     var ct = new Date().getTime();
     $.get('/time',function(data){
-	var st = parseInt(data,10);
 	fingerprint.rtt = new Date().getTime() - ct;
+	var st = parseInt(data,10);
 	fingerprint.latency = st - ct;
     });
 }
