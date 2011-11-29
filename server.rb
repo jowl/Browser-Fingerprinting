@@ -115,6 +115,11 @@ class Server < Sinatra::Base
 
   end
 
+  get '/time' do
+    response.body = [(Time.now.to_f*1000).round.to_s]
+    response.finish
+  end
+
   get '/count' do
     db = Mongo::Connection.new.db('fingerprints')
     collection = db.collection('fingerprints')

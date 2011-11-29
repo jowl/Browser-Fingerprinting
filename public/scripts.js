@@ -6,6 +6,8 @@ var fingerprint =
     resolution       : {},
     plugins          : [],
     timezone         : null,
+    latency          : null,
+    rtt              : null,
     cookies_enabled  : null,
     fonts            : [],
     accept_language  : [],
@@ -30,17 +32,6 @@ $(function()
 	color_depth :  screen.colorDepth 
     };
 
-/*    for ( var i=0; i < navigator.mimeTypes.length ; i++)
-    {
-	var mime = navigator.mimeTypes[i];
-	fingerprint.mime_types.push({ type : mime.type,
-                                 plugin : { 
-				     name : mime.enabledPlugin.name, 
-				     description : mime.enabledPlugin.description
-				 }
-			       });
-    } */
-
     for ( var i= 0; i < navigator.plugins.length; i++) {
 	var plugin = navigator.plugins[i];
 	var mime_types = [];
@@ -61,10 +52,20 @@ $(function()
     // Flash is used to retreive list of fonts
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
 
-    update_count();
+    calcClockDiff();
 
+    update_count();
     
 });
+
+function calcClockDiff(){
+    var ct = new Date().getTime();
+    $.get('/time',function(data){
+	var st = parseInt(data,10);
+	fingerprint.rtt = new Date().getTime() - ct;
+	fingerprint.latency = st - ct;
+    });
+}
 
 // Called from FontList.swf
 function populateFontList(fontArr){ fingerprint.fonts = fontArr; }
@@ -167,7 +168,7 @@ function display_obj(obj)
 	elem = $('<table>').addClass('obj');
 	for( var i in obj )
 	{
-	    if(obj[i])
+	    if(obj[i] != null && obj[i] != '')
 	    {
 		var name = i.replace(/(^\w|_\w)/g, 
 				     function(c) { return c.toUpperCase(); })
