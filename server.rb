@@ -35,24 +35,26 @@ class Server < Sinatra::Base
     end
     accept = env['rack-accept.request']
 
-    @fingerprint['accept_language'] = []
+    @fingerprint['accept'] = {}
+
+    @fingerprint['accept']['language'] = []
     for language in accept.language.values
-      @fingerprint['accept_language'].push({'name' => language,'qvalue' => accept.language.qvalue(language)})
+      @fingerprint['accept']['language'].push({'name' => language,'qvalue' => accept.language.qvalue(language)})
     end 
 
-    @fingerprint['accept_charset'] = []
+    @fingerprint['accept']['charset'] = []
     for charset in accept.charset.values
-      @fingerprint['accept_charset'].push({'name' => charset,'qvalue' => accept.charset.qvalue(charset)})
+      @fingerprint['accept']['charset'].push({'name' => charset,'qvalue' => accept.charset.qvalue(charset)})
     end 
 
-    @fingerprint['accept_encoding'] = []
+    @fingerprint['accept']['encoding'] = []
     for enc in accept.encoding.values
-      @fingerprint['accept_encoding'].push({'name' => enc,'qvalue' => accept.encoding.qvalue(enc)})
+      @fingerprint['accept']['encoding'].push({'name' => enc,'qvalue' => accept.encoding.qvalue(enc)})
     end 
 
-    @fingerprint['accept_mediatype'] = []
+    @fingerprint['accept']['media_type'] = []
     for typ in accept.media_type.values
-      @fingerprint['accept_mediatype'].push({'name' => typ,'qvalue' => accept.media_type.qvalue(typ)})
+      @fingerprint['accept']['media_type'].push({'name' => typ,'qvalue' => accept.media_type.qvalue(typ)})
     end 
 
     @language = lang

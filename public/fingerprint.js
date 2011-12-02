@@ -1,18 +1,15 @@
 var fingerprint = 
 {
-    useragent        : null,
-    navigator        : null,
     ip               : null,
     uid              : null,
+    useragent        : null,
+    navigator        : null,
     screen           : null,
     timezone         : null,
     latency          : null,
     rtt              : null,
     fonts            : [],
-    accept_language  : [],
-    accept_charset   : [],
-    accept_encoding  : [],
-    accept_mediatype : [],
+    accept           : null,
     timestamp        : new Date().getTime()
 }
 
@@ -119,7 +116,8 @@ function preview(hide)
     {
 	$('#fingerprint').fadeOut(500);
 	$('body').animate({ scrollTop: 0 },500,function(){
-	    $('.preview').text(window.translations['button_preview']);});
+	    $('.preview').attr('src',window.translations['button_show']);
+	});
 	$('#count').show();
     }
     else
@@ -133,7 +131,7 @@ function preview(hide)
 	$('body').animate({
 	    scrollTop: $("#fingerprint").offset().top
 	}, 500);
-//	$('.preview').text(window.translations['button_hide']);
+	$('.preview').attr('src',window.translations['button_hide']);
 	$('#count').hide();
     }
 }
