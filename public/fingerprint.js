@@ -1,14 +1,13 @@
 var fingerprint = 
 {
     useragent        : null,
+    navigator        : null,
     ip               : null,
     uid              : null,
-    resolution       : {},
-    plugins          : [],
+    screen           : null,
     timezone         : null,
     latency          : null,
     rtt              : null,
-    cookies_enabled  : null,
     fonts            : [],
     accept_language  : [],
     accept_charset   : [],
@@ -17,37 +16,46 @@ var fingerprint =
     timestamp        : new Date().getTime()
 }
 
-
 /* 
  * Run when entire DOM is loaded
  */
 $(function()
 {
 
-    fingerprint.useragent.description = navigator.userAgent;
-
-    fingerprint.resolution = { 
-	width : screen.width, 
-	height : screen.height, 
-	color_depth :  screen.colorDepth 
-    };
-
-    for ( var i= 0; i < navigator.plugins.length; i++) {
-	var plugin = navigator.plugins[i];
-	var mime_types = [];
-	for ( var j=0; j < plugin.length; j++) {
-	    mime_types.push(plugin.item(j).type);
+    // get navigator info
+    fingerprint.navigator = 
+	{ 
+	    appCodeName   : navigator.appCodeName,
+	    appName       : navigator.appName,
+	    appVersion    : navigator.appVersion,
+	    cookieEnabled : navigator.cookieEnabled,
+	    language      : navigator.language,
+	    plugins       : [],
+	    platform      : navigator.platform,
+	    product       : navigator.product,
+	    productSub    : navigator.productSub,
+	    userAgent     : navigator.userAgent,
+	    vendor        : navigator.vendor,
+	    vendorSub     : navigator.vendorSub
 	}
-	fingerprint.plugins.push({'name' : plugin.name,
-				  'version' : plugin.version,
-				  'description' : plugin.description,
-				  'mime_types' : mime_types});
-    }
 
+    fingerprint.screen = 
+	{
+	    width          : screen.width,
+	    height         : screen.height,
+	    availWidth     : screen.availWidth,
+	    availHeight    : screen.availHeight,
+	    availLeft      : screen.availLeft,
+	    availTop       : screen.availTop,
+	    colorDepth     : screen.colorDepth,
+	    pixelDepth     : screen.pixelDepth,
+	    updateInterval : screen.updateInterval // ie-specific
+
+	};
 
     fingerprint.timezone = new Date().getTimezoneOffset();
 
-    fingerprint.cookies_enabled = navigator.cookieEnabled;
+    getPlugins();
 
     // Flash is used to retreive list of fonts
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
@@ -168,7 +176,7 @@ function display_obj(obj)
 	elem = $('<table>').addClass('obj');
 	for( var i in obj )
 	{
-	    if(obj[i] != null && obj[i] != '')
+	    if(obj[i] !== null && obj[i] !== '' && obj[i] !== undefined)
 	    {
 		var name = i.replace(/(^\w|_\w)/g, 
 				     function(c) { return c.toUpperCase(); })
