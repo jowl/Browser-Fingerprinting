@@ -116,9 +116,9 @@ function preview(hide)
     {
 	$('#fingerprint').fadeOut(500);
 	$('body').animate({ scrollTop: 0 },500,function(){
-	    $('.preview').attr('src',window.translations['button_show']);
+	    $('.preview').attr('src',window.translations['button_preview']);
+	    $('#count').show();
 	});
-	$('#count').show();
     }
     else
     {
@@ -135,7 +135,6 @@ function preview(hide)
 	$('#count').hide();
     }
 }
-
 
 /*
  * This function produces an HTML element from an object.
