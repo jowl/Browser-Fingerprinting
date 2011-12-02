@@ -121,6 +121,7 @@ class Server < Sinatra::Base
   end
 
   get '/count' do
+    cache_control :no_cache
     db = Mongo::Connection.new.db('fingerprints')
     collection = db.collection('fingerprints')
     response.body = [collection.count().to_s]
