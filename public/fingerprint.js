@@ -9,7 +9,7 @@ var fingerprint =
     window           : null,
     timezone         : null,
     clock_diff       : null,
-    rtt              : null,
+    rtts             : []x,
     fonts            : [],
     accept           : null,
     timestamp        : new Date().getTime()
@@ -74,13 +74,12 @@ $(function()
 });
 
 function getRTT(k){
-    var c = 0;
     var updateRTT = function(ct)
     {
 	return function(data)
 	{
 	    var rtt = new Date().getTime() - ct;
-	    fingerprint.rtt = (c*fingerprint.rtt+rtt)/++c;
+	    fingerprint.rtts.push(rtt);
 	    var st = parseInt(data,10);
 	    var clock_diff = 
 		{ 
