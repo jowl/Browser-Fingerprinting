@@ -9,7 +9,7 @@ var fingerprint =
     window           : null,
     timezone         : null,
     clock_diff       : null,
-    rtts             : []x,
+    rtts             : [],
     fonts            : [],
     accept           : null,
     timestamp        : new Date().getTime()
