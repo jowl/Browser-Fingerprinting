@@ -9,8 +9,7 @@ var fingerprint =
     window           : null,
     timezone         : null,
     clock_diff       : null,
-    test             : [],
-    rtts             : [],
+    rtt              : null,
     fonts            : [],
     accept           : null,
     timestamp        : new Date().getTime()
@@ -68,27 +67,26 @@ $(function()
     // Flash is used to retreive list of fonts
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
 
-    getRTT(10);
+    getRTT(20);
 
     update_count();
     
 });
 
 function getRTT(k){
+    var c = 0;
     var updateRTT = function(ct)
     {
 	return function(data)
 	{
 	    var rtt = new Date().getTime() - ct;
-	    fingerprint.rtts.push(rtt);
-	    fingerprint.rtt = rtt;
+	    fingerprint.rtt = (c*fingerprint.rtt+rtt)/++c;
 	    var st = parseInt(data,10);
 	    var clock_diff = 
 		{ 
 		    min : Math.min(st - ct - rtt, st - ct),
 		    max : Math.max(st - ct - rtt, st - ct)
 		};
-	    fingerprint.test.push(clock_diff);
 	    if ( fingerprint.clock_diff === null ) fingerprint.clock_diff = clock_diff;
 	    else fingerprint.clock_diff = 
 		{
