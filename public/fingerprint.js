@@ -5,6 +5,7 @@ var fingerprint =
     useragent        : null,
     navigator        : null,
     screen           : null,
+    window           : null,
     timezone         : null,
     latency          : null,
     rtt              : null,
@@ -35,6 +36,14 @@ $(function()
 	    vendor        : navigator.vendor,
 	    vendorSub     : navigator.vendorSub
 	}
+
+    fingerprint.window =
+	{
+	    innerWidth  : window.innerWidth,
+	    innerHeight : window.innerHeight,
+	    outerWidth  : window.outerWidth,
+	    outerHeight : window.outerHeight
+	};
 
     fingerprint.screen = 
 	{
