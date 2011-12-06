@@ -67,9 +67,9 @@ $(function()
     // Flash is used to retreive list of fonts
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
 
-    getRTT(20);
-
     update_count();
+
+    getRTT(10);
     
 });
 

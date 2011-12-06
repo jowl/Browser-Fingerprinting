@@ -92,23 +92,7 @@ class Server < Sinatra::Base
       db = Mongo::Connection.new.db('fingerprints')
       collection = db.collection('fingerprints')
       
-      response.body = collection.find().to_a.map { |f| 
-        tmp = { 'useragent_name' => f['useragent']['agent_name'],
-          'useragent_version' => f['useragent']['agent_version'],
-          'ip' => f['ip'],
-          'fonts' => f['fonts'].count,
-          'resolution' => f['resolution']['width']*f['resolution']['height']*f['resolution']['color_depth'],
-          'timezone' => f['timezone'],
-          'timestamp' => f['timestamp'],
-          'uid' => f['uid']
-        }
-        if f['mime_types'] != nil 
-          tmp['plugins'] = f['mime_types'].count
-        else
-          tmp['plugins'] = f['plugins'].count
-        end
-        tmp
-      }.to_json
+      response.body = collection.find().to_json
           
       response.finish
     else
