@@ -8,8 +8,9 @@ var fingerprint =
     screen           : null,
     window           : null,
     timezone         : null,
-    latency          : null,
-    rtt              : null,
+    clock_diff       : null,
+    test             : [],
+    rtts             : [],
     fonts            : [],
     accept           : null,
     timestamp        : new Date().getTime()
@@ -79,13 +80,21 @@ function getRTT(k){
 	return function(data)
 	{
 	    var rtt = new Date().getTime() - ct;
-	    rtts.push(rtt);
-	    if ( (fingerprint.rtt === null) || (rtt < fingerprint.rtt) )
-	    {
-		fingerprint.rtt = rtt;
-		var st = parseInt(data,10);
-		fingerprint.latency = st - ct;
-	    }
+	    fingerprint.rtts.push(rtt);
+	    fingerprint.rtt = rtt;
+	    var st = parseInt(data,10);
+	    var clock_diff = 
+		{ 
+		    min : Math.min(st - ct - rtt, st - ct),
+		    max : Math.max(st - ct - rtt, st - ct)
+		};
+	    fingerprint.test.push(clock_diff);
+	    if ( fingerprint.clock_diff === null ) fingerprint.clock_diff = clock_diff;
+	    else fingerprint.clock_diff = 
+		{
+		    min : Math.max(clock_diff.min,fingerprint.clock_diff.min),
+		    max : Math.min(clock_diff.max,fingerprint.clock_diff.max)
+		}
 	};
     }
 
