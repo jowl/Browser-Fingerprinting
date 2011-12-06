@@ -1,3 +1,4 @@
+var rtts = [];
 var fingerprint = 
 {
     ip               : null,
@@ -78,7 +79,7 @@ function getRTT(k){
 	return function(data)
 	{
 	    var rtt = new Date().getTime() - ct;
-	    
+	    rtts.push(rtt);
 	    if ( (fingerprint.rtt === null) || (rtt < fingerprint.rtt) )
 	    {
 		fingerprint.rtt = rtt;
