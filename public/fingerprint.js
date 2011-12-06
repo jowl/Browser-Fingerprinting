@@ -9,7 +9,6 @@ var fingerprint =
     timezone         : null,
     latency          : null,
     rtt              : null,
-    updates          : 0,
     fonts            : [],
     accept           : null,
     timestamp        : new Date().getTime()
@@ -67,7 +66,7 @@ $(function()
     // Flash is used to retreive list of fonts
     swfobject.embedSWF("/FontList.swf", "flashcontent", "0", "0", "9.0.0");
 
-    getRTT(5);
+    getRTT(10);
 
     update_count();
     
@@ -85,7 +84,6 @@ function getRTT(k){
 		fingerprint.rtt = rtt;
 		var st = parseInt(data,10);
 		fingerprint.latency = st - ct;
-		fingerprint.updates++;
 	    }
 	};
     }
