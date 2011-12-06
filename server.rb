@@ -118,6 +118,7 @@ class Server < Sinatra::Base
   end
 
   get '/time' do
+    cache_control :no_cache
     response.body = [(Time.now.to_f*1000).round.to_s]
     response.finish
   end
