@@ -1,4 +1,3 @@
-var rtts = [];
 var fingerprint = 
 {
     ip               : null,
@@ -36,7 +35,7 @@ $(function()
 	    userAgent     : navigator.userAgent,
 	    vendor        : navigator.vendor,
 	    vendorSub     : navigator.vendorSub
-	}
+	};
 
     fingerprint.window =
 	{
@@ -74,7 +73,7 @@ $(function()
 });
 
 function getRTT(k){
-    var updateRTT = function(ct)
+    var updateRTT = function(ct,k)
     {
 	return function(data)
 	{
@@ -92,11 +91,13 @@ function getRTT(k){
 		    min : Math.max(clock_diff.min,fingerprint.clock_diff.min),
 		    max : Math.min(clock_diff.max,fingerprint.clock_diff.max)
 		}
+
+	    if ( k > 0 )
+		$.get('/time',updateRTT(new Date().getTime(),k-1));
 	};
     }
 
-    for ( var i = 0; i < k ; i++ )
-        $.get('/time',updateRTT(new Date().getTime()));
+    $.get('/time',updateRTT(new Date().getTime(),k-1));
 }
 
 // Called from FontList.swf

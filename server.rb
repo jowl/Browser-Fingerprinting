@@ -87,12 +87,14 @@ class Server < Sinatra::Base
   end
 
   # Get dataset
-  get %r{/dataset(.json)?} do |json|
+  get %r{/dataset(\.json)?} do |json|
     if json
       db = Mongo::Connection.new.db('fingerprints')
       collection = db.collection('fingerprints')
       
-      response.body = collection.find().to_json
+      fields = params.keys.reject { |x| x == 'captures' }
+
+      response.body = collection.find({}, { :fields => fields, :sort => 'uid'}).to_json
           
       response.finish
     else
