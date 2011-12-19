@@ -378,7 +378,6 @@ var Fingerprint =
 	if ( uid != this.fingerprint.uid )
 	{
 	    this.fingerprint.uid = uid;
-	    document.cookie = 'fingerprint='+uid;
 	}
     }
 
