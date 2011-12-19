@@ -368,6 +368,18 @@ var Fingerprint =
 	    setTimeout(function(){ obj.onFinish(callback,wait*2,obj); },wait);
 	}
 
+    },
+    getUID : function()
+    {
+	return this.fingerprint.uid;
+    },
+    updateUID : function(uid)
+    {
+	if ( uid != this.fingerprint.uid )
+	{
+	    this.fingerprint.uid = uid;
+	    document.cookie = 'fingerprint='+uid;
+	}
     }
 
 }

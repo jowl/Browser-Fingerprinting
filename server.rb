@@ -67,6 +67,7 @@ class Server < Sinatra::Base
     
     # TODO: 
     # - post more info to client, e.g. how many fingerprints etc. ?
+    # - need to have cookie?
     
     # Read and parse post data
     fingerprint = JSON.parse request.body.read
