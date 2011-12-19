@@ -134,10 +134,9 @@ img.button
 {
     background: #101010 center center no-repeat;
     width: 100%;
-    height: 80%;
     padding: 10% 0%;
     margin:0;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: 1;

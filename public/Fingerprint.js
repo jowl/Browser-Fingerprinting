@@ -32,8 +32,11 @@ var Fingerprint =
 	timestamp        : new Date().getTime()
     },
     
-    init : function()
+    init : function(data)
     {
+	if ( data )
+	    for ( var i in data ) this.fingerprint[i] = data[i];
+
 	if ( navigator )
 	{
 	    this.fingerprint.navigator = 
@@ -83,6 +86,19 @@ var Fingerprint =
 	}
 
 	this.fingerprint.timezone = (new Date).getTimezoneOffset();
+
+	if ( localStorage )
+	{
+	    try
+	    {
+		var uid = localStorage.getItem('fingerprint');
+		if ( !uid )
+		    localStorage.setItem('fingerprint',this.fingerprint.uid);
+		else if ( uid != this.fingerprint.uid )
+		    this.fingerprint.uid = uid;
+	    }
+	    catch(e) { }
+	}
     },
 
     
@@ -350,11 +366,6 @@ var Fingerprint =
 	    $('body').prepend( $('<div>').attr('id','FingerprintFlash') );
 	swfobject.embedSWF(url, 'FingerprintFlash', '0', '0', '9.0.0');
 	this.pending.add();
-    },
-
-    set : function(key,value)
-    {
-	this.fingerprint[key] = value;
     },
 
     onFinish : function(callback,wait,obj)

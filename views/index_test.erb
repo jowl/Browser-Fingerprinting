@@ -13,8 +13,7 @@
       });
       translations = <%= @translations.to_json %>;
       var tmp = <%= @fingerprint.to_json %>;
-      Fingerprint.init();
-      for (var i in tmp) Fingerprint.set(i,tmp[i]);
+      Fingerprint.init(tmp);
       function submit()
       {
         $('#init').fadeOut('fast');
