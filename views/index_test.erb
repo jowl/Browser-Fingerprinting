@@ -6,81 +6,56 @@
     <script src="/jquery.json-2.3.min.js" type="text/javascript"></script>
     <script src="/Fingerprint.js" type="text/javascript"></script>
     <script type="text/javascript">
-      translations = <%= @translations.to_json %>;
-      var tmp = <%= @fingerprint.to_json %>;
-      for (var i in tmp) Fingerprint.set(i,tmp[i]);
-      Fingerprint.init();
-      $(function()
-      {
+      $(function(){
         Fingerprint.initFlash('/Fonts.swf');
         Fingerprint.updateRTT(10,'/time');
         Fingerprint.updatePlugins(navigator.userAgent);
-        Fingerprint.onFinish(function(){alert('done!')});
       });
-      function preview(hide)
+      translations = <%= @translations.to_json %>;
+      var tmp = <%= @fingerprint.to_json %>;
+      Fingerprint.init();
+      for (var i in tmp) Fingerprint.set(i,tmp[i]);
+      function submit()
       {
-      
-          if ( $('#fingerprint').filter(':visible').size() > 0 || hide )
-          {
-              $('#fingerprint').fadeOut(500);
-              $('body').animate({ scrollTop: 0 },500,function(){
-                  $('.preview').attr('src',window.translations['button_preview']);
-                  $('#count').show();
-              });
-          }
-          else
-          {
-              $('#fingerprint').children().remove('table.obj');
-              $('#fingerprint').prepend(
-                  Fingerprint.generateDOM().css({margin : 'auto' })
-                      .prepend('<tr><td colspan=2><h1>'+window.translations['your_fingerprint']+'</h1></td></tr>')
-                      .css( {paddingTop : '1em'})).fadeIn(500);
-              
-              $('body').animate({
-                  scrollTop: $("#fingerprint").offset().top
-              }, 500);
-              $('.preview').attr('src',window.translations['button_hide']);
-              $('#count').hide();
-          }
-      }    
+        $('#init').fadeOut('fast');
+        Fingerprint.onFinish(function()
+        {
+            Fingerprint.submit('/post',function()
+            {
+                $('#init').fadeIn('fast');
+                alert('There was an error');
+            },
+            function()
+            {
+                $('#loading').fadeOut('fast');
+                $('#fingerprint').children().remove('table.obj');
+                $('#fingerprint').css('display','block');
+                $('#fingerprint').prepend(Fingerprint.generateDOM());
+            });
+        });
+      }
 </script>
     <title><%= @translations['title'] %></title>
     <link rel="stylesheet" type="text/css" href="/style.css" />
   </head>
   <body>
-
-    <div id="flashcontent"></div>
-
-    <div id="content">
-      <h1><%= @translations['title'] %></h1>
-      <%= @translations['title_info'] %>
+    <div id="init">
+      <p>
+	Please support our Master's Thesis research by sharing your browser's
+	fingerprint with us. <br/>You need not worry, we wont share your data with
+	anyone under any circumstances.
+      </p>
+      <img src="/share.png" onclick="submit()" alt="" />
+      <p class="disclaimer">
+	Upon clicking Share, you agree to letting us store information about your browser. <br/>Burt AB is in no way affiliated with this webpage.
+      </p>
     </div>
-    
-    <span>
-      <img class="button" src="<%= @translations['button_switch_language'] %>" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')">
-    </span>
-    <span>
-      <img src="<%= @translations['button_preview'] %>" onclick="preview()" class="button preview">
-    </span>
-    <span class="submit">
-      <img src="<%= @translations['button_submit'] %>" onclick="Fingerprint.submit('/post')" class="button">
-    </span>
+    <div id="loading"></div>
 
-    <div id="response"></div>
-
-    <div id="fingerprint">
-      <span>
-	<img src="<%= @translations['button_switch_language']%>" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')" class="button">
-      </span>
-      <span>
-	<img src="<%= @translations['button_hide'] %>" onclick="preview()" class="button">
-      </span>
-      <span class="submit">
-	<img src="<%= @translations['button_submit'] %>" onclick="submit()" class="button">
-      </span>
+    <div id="thanks">
+      <h1>Thank you for sharing!</h1>
+      <div id="fingerprint"></div>
     </div>
-
-    <div id="count"></div>
 
   </body>
 </html>

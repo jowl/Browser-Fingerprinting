@@ -16,7 +16,7 @@
     color: #4c4c4c;
 }
 
-body { background-color: #f0f0f0; text-align: center; overflow-y: scroll; }
+body { background-color: #f0f0f0; text-align: center; }
 
 h1 { font-size: 1.5em; font-weight: bold; text-align: center; }
 p { width: 50%; text-align: justify; margin: 1em auto; }
@@ -95,3 +95,62 @@ img.button
 .orange { color: #ff7e00; }
 
 /*****************************************************************************/
+
+
+/* New stuff *****************************************************************/
+#init
+{
+    background: #101010 center center no-repeat;
+    width: 100%;
+    height: 80%;
+    padding: 10% 0%;
+    margin:0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    text-align: center;
+}
+
+#init>img { cursor: pointer; }
+
+#init>p { padding: 3em 0em; color: #f0f0f0; text-align: center; }
+#init>p.disclaimer { font-size:0.8em; color: #909090; }
+
+
+#loading
+{
+    background: #101010 url('/loading.gif') center center no-repeat;
+    width: 100%;
+    height: 100%;
+    margin:0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+#thanks
+{
+    background: #101010 center center no-repeat;
+    width: 100%;
+    height: 80%;
+    padding: 10% 0%;
+    margin:0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    text-align: center;
+    color: #f0f0f0;
+}
+
+#fingerprint_new
+{ 
+    width: 100%; 
+    padding: 0px; 
+    height: 100%; 
+}
+
+#fingerprint>table { margin: auto; }
+
