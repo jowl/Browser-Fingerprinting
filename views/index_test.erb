@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="/swfobject.js" type="text/javascript"></script>
+    <script src="/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="/Fingerprint.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      translations = <%= @translations.to_json %>;
+      var tmp = <%= @fingerprint.to_json %>;
+      for (var i in tmp) Fingerprint.set(i,tmp[i]);
+      Fingerprint.init();
+      $(function()
+      {
+        Fingerprint.initFlash('/Fonts.swf');
+        Fingerprint.updateRTT(10,'/time');
+        Fingerprint.updatePlugins(navigator.userAgent);
+        Fingerprint.onFinish(function(){alert('done!')});
+      });
+      function preview(hide)
+      {
+      
+          if ( $('#fingerprint').filter(':visible').size() > 0 || hide )
+          {
+              $('#fingerprint').fadeOut(500);
+              $('body').animate({ scrollTop: 0 },500,function(){
+                  $('.preview').attr('src',window.translations['button_preview']);
+                  $('#count').show();
+              });
+          }
+          else
+          {
+              $('#fingerprint').children().remove('table.obj');
+              $('#fingerprint').prepend(
+                  Fingerprint.generateDOM().css({margin : 'auto' })
+                      .prepend('<tr><td colspan=2><h1>'+window.translations['your_fingerprint']+'</h1></td></tr>')
+                      .css( {paddingTop : '1em'})).fadeIn(500);
+              
+              $('body').animate({
+                  scrollTop: $("#fingerprint").offset().top
+              }, 500);
+              $('.preview').attr('src',window.translations['button_hide']);
+              $('#count').hide();
+          }
+      }    
+</script>
+    <title><%= @translations['title'] %></title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+  <body>
+
+    <div id="flashcontent"></div>
+
+    <div id="content">
+      <h1><%= @translations['title'] %></h1>
+      <%= @translations['title_info'] %>
+    </div>
+    
+    <span>
+      <img class="button" src="<%= @translations['button_switch_language'] %>" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')">
+    </span>
+    <span>
+      <img src="<%= @translations['button_preview'] %>" onclick="preview()" class="button preview">
+    </span>
+    <span class="submit">
+      <img src="<%= @translations['button_submit'] %>" onclick="Fingerprint.submit('/post')" class="button">
+    </span>
+
+    <div id="response"></div>
+
+    <div id="fingerprint">
+      <span>
+	<img src="<%= @translations['button_switch_language']%>" onclick="window.location.assign('<%= @translations['switch_language_url'] %>')" class="button">
+      </span>
+      <span>
+	<img src="<%= @translations['button_hide'] %>" onclick="preview()" class="button">
+      </span>
+      <span class="submit">
+	<img src="<%= @translations['button_submit'] %>" onclick="submit()" class="button">
+      </span>
+    </div>
+
+    <div id="count"></div>
+
+  </body>
+</html>
