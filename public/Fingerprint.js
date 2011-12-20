@@ -8,12 +8,14 @@
 var Fingerprint =
 {
 
-    pending : 
+    status : 
     { 
-	pending : 0,
-	add    : function() { this.pending = Math.max(this.pending+1,1); },
-	done   : function() { this.pending--; },
-	isDone : function() { return this.pending == 0; }
+	pending : -1,
+	status  : ['Done'],
+	add     : function(status) { this.status.push(status); this.pending = Math.max(this.pending+1,1); },
+	done    : function() { this.status.pop(); this.pending--; },
+	isDone  : function() { return this.pending == 0; },
+	get     : function() { return (this.pending > -1 ) ? this.status[this.status.length-1]:'Unknown'; }
     },
 
     fingerprint :
@@ -250,11 +252,11 @@ var Fingerprint =
 	
 	if ( this.fingerprint.navigator && navigator )
 	{
-	    this.pending.add();
+	    this.status.add('Searching for plugins');
 	    this.fingerprint.navigator.plugins = ( navigator.userAgent.indexOf('MSIE') == -1 ) 
 	        ? getPlugins() 
 	        : getPluginsIE();
-	    this.pending.done();
+	    this.status.done();
 	}
     },
 
@@ -263,6 +265,8 @@ var Fingerprint =
      **/
     updateRTT : function getRTT(k,url)
     {
+	var K = k;
+	
 	var testRTT = function(ct,k,obj)
 	{
 	    return function(data)
@@ -282,21 +286,21 @@ var Fingerprint =
 			max : Math.min(clock_diff.max,obj.fingerprint.clock_diff.max)
 		    }
 
-		obj.pending.done();
+		obj.status.done();
 
 		if ( k > 0 )
 		{
 		    $.get(url,testRTT(new Date().getTime(),k-1, obj));
-		    obj.pending.add();
+		    obj.status.add('Sending RTT request no. ' + (K-k+1));
 		}
 	    };
 	}
 
 	$.get(url,testRTT(new Date().getTime(),k-1,this));
-	this.pending.add();
+	this.status.add('Sending RTT request no. ' + (K-k+1));
     },
 	
-    updateFonts : function(fonts){ this.fingerprint.fonts = fonts; this.pending.done(); },
+    updateFonts : function(fonts){ this.fingerprint.fonts = fonts; this.status.done(); },
     
     updateTimestamp : function()
     { 
@@ -365,13 +369,13 @@ var Fingerprint =
 	if ( $('#FingerprintFlash').length == 0 )
 	    $('body').prepend( $('<div>').attr('id','FingerprintFlash') );
 	swfobject.embedSWF(url, 'FingerprintFlash', '0', '0', '9.0.0');
-	this.pending.add();
+	this.status.add('Searching for installed fonts');
     },
 
     onFinish : function(callback,wait,obj)
     {
 
-	if ( this.pending.isDone() ) callback();
+	if ( this.status.isDone() ) callback();
 	else 
 	{
 	    if ( !wait ) wait = 125;
@@ -391,5 +395,4 @@ var Fingerprint =
 	    this.fingerprint.uid = uid;
 	}
     }
-
 }
