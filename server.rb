@@ -59,7 +59,7 @@ class Server < Sinatra::Base
 
     @language = lang
     @translations = Lang.getLang(lang)
-    erb :index_test
+    erb :index
   end
   
   # Post fingerprint
