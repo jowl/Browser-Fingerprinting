@@ -1,0 +1,28 @@
+<div>
+  <p>
+    Denna webbsida är en del av ett exjobb och dess syfte är att samla in data
+    från webbläsare. Målet med projektet är att utveckla en metod för att avgöra
+    om en webbläsare är unik, utan att använda inkräktande metoder såsom kakor. Vi
+    försöker göra detta genom att enbart titta på information om din webbläsare,
+    såsom skärmupplösning, installerade typsnitt, webbläsarversion, osv. Denna
+    information utgör vad vi kallar ditt <i>fingeravtryck</i>.
+  </p>
+  <p>
+    Vi hoppas att du kan ta dig tid att dela med dig av ditt fingeravtryck till
+    oss, genom att klicka på knappen <span class="blue">Share</span>. All
+    information som samlats in av dig kommer att visas för dig, och denna kommer
+    att tas bort så snart vi slutfört vårt projekt (April 2012). Ett av värdena vi
+    samlar in är <i>Uid</i>, vilket är ett slumpmässigt genererat id som sätts i
+    form av en cookie för att vi ska kunna utveckla vår metod.
+  </p>
+  <p>
+    När du klickar på <span class="blue">Share</span> godkänner du att vi sparar
+    ditt <i>fingeravtryck</i> för att använda i vår forskning. Din data kommer
+    inte, under några som helst omständigheter, att användas för kommersiella
+    syften eller delas med utomstående.
+  </p>
+  <p>
+    Denna webbsida är inte kopplad till Burt AB på något sätt. Om du har frågor,
+    vänligen kontakta ferik(at)student.chalmers.se.
+  </p>
+</div>

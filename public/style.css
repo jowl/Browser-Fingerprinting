@@ -14,13 +14,11 @@
 { 
     font-size: 16px;  
     font-family: "Helvetica Neue", Arial, sans-serif; 
-    color: #ddd;
 }
 
 body { background-color: #f0f0f0; text-align: center; }
 
 h1 { font-size: 1.5em; font-weight: bold; text-align: center; }
-p { width: 50%; text-align: justify; margin: 1em auto; }
 a { color: #007cc3; }
 
 /*****************************************************************************/
@@ -31,8 +29,8 @@ a { color: #007cc3; }
 {
     background: #101010 center center no-repeat;
     width: 100%;
-    height: 90%;
-    padding: 5% 0%;
+    height: 94%;
+    padding: 3% 0%;
     margin:0;
     position: fixed;
     top: 0;
@@ -41,12 +39,14 @@ a { color: #007cc3; }
     text-align: center;
 }
 
-#init>h1 { font-size: 2em; }
-#init>p { padding: 3em 0em; text-align: center; }
-#init>p.disclaimer { font-size:0.8em; color: #909090; }
-#init>p.disclaimer a { font-size:0.8em; }
+#init * { color: #ddd; }
 
-#status { color: #909090; }
+#init>h1 { font-size: 2em; }
+#init>p { padding: 3em 0em; text-align: center; width: 50%; margin: 1em auto; }
+#init>p.disclaimer { font-size:0.8em; color: #909090; }
+#init>p.disclaimer a { font-size:0.8em; color: #007cc3; }
+
+#status.audit { color: #909090; }
 
 #thanks
 {
@@ -61,17 +61,28 @@ a { color: #007cc3; }
 
 /* Popup *********************************************************************/
 
-#info>p
+#info>div.done
 {
-   background: #f0f0f0;
-   /*border-radius: 1em;*/
-   border: 4px solid #007cc3;
+  background: #ddd url('/close.png') top right no-repeat;
+}
+
+#info>div
+{
+   background: #ddd url('/loading_white.gif') center center no-repeat; 
+   border: 2px solid #007cc3;
    width: 25%;
    padding: 3em;
-   text-align: justify;
-   font-size: 0.8em;
- 
+   margin: 0em auto;
 }
+
+#info>div>p
+{
+  text-align: justify;
+  font-size: 0.8em;
+  color: #101010;
+}
+
+#info>div>p * { font-size: 1em }
 
 #info
 {
@@ -79,7 +90,8 @@ a { color: #007cc3; }
     position: fixed;
     z-index: 4;
     height: 90%;
-    padding: 5%;
+    width: 100%;
+    padding: 5% 0%;
     background: rgba(16,16,16,0.8);
 }
 

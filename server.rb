@@ -104,6 +104,17 @@ class Server < Sinatra::Base
 
   end
 
+  get '/info' do
+    accept = env['rack-accept.request']
+    lang_pref = accept.best_language(accept.language.values)
+    if lang_pref.include? 'sv'
+      response.body = File.read(File.join('public', 'info_sv'))
+    else
+      response.body = File.read(File.join('public', 'info_en'))
+    end
+    response.finish
+  end
+
   get '/time' do
     cache_control :no_cache
     response.body = [(Time.now.to_f*1000).round.to_s]

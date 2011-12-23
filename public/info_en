@@ -1,0 +1,29 @@
+<div>
+  <p>
+    This webpage is part of a Master's Thesis project, with the purpose of 
+    collecting data from web browsers. The goal of the project is
+    to develop a method for determining the uniqueness of browsers, without
+    using intrusive methods such as cookies. We will attempt to do this by
+    looking at information about your browser, such as screen resolution,
+    installed fonts, browser version, etc. This information constitutes
+    your <i>browser fingerprint</i>. 
+  </p>
+  <p>
+    We would greatly appreciate if you would take the time to share your data with
+    us by clicking the <span class="blue">Share</span> button. The data
+    collected from your browser will be displayed, and it will be removed from our
+    server when the project is complete (April 2012). One of the values we collect
+    is called <i>Uid</i>, which is a random id that is set as a cookie to be used
+    when developing our uniqueness method.
+  </p>
+  <p>
+    Upon clicking <span class="blue">Share</span>, you agree to sharing
+    your <i>fingerprint</i> with us and letting us store it for research
+    purposes in out thesis work. No data will, under any circumstances, 
+    be used for commercial purposes nor shared with others.
+  </p>
+  <p>
+    This webpage is not affiliated in any way with Burt Corp. If you have any 
+    questions, please contact ferik(at)student.chalmers.se.
+  </p>
+</div>

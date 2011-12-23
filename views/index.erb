@@ -7,23 +7,28 @@
     <script src="/jquery.json-2.3.min.js" type="text/javascript"></script>
     <script src="/Fingerprint.js" type="text/javascript"></script>
     <script type="text/javascript">
+      var statusTimeout;
       $(function(){
-        updateStatus();
-
-        Fingerprint.initFlash('/Fonts.swf');
-        Fingerprint.updateRTT(10,'/time');
-        Fingerprint.updatePlugins(navigator.userAgent);
-
         $('#share').bind('click',submit)
                    .bind('mouseenter',function(){ $(this).attr('src','/share_hover.png'); })
                    .bind('mouseleave',function(){ $(this).attr('src','/share.png'); });
         $('#info').bind('click',info);
+
+        Fingerprint.events.add(Fingerprint.updateRTT,[10,'/time'])
+                          .add(Fingerprint.initFlash,['/Fonts.swf'])
+                          .add(Fingerprint.updatePlugins,[navigator.userAgent])
+                          .run();
+
+        Fingerprint.status.onChange = updateStatus;
+
       });
-      translations = <%= @translations.to_json %>;
+
       var tmp = <%= @fingerprint.to_json %>;
+
       Fingerprint.init(tmp);
       function submit()
       {
+        $('#status').removeClass('orange');
         $('#share').attr('src','/loading.gif')
                    .css('cursor','default')
                    .unbind();
@@ -33,12 +38,20 @@
         });
         Fingerprint.onFinish(function()
         { 
-            Fingerprint.submit('/post',function()
+            clearTimeout(statusTimeout);
+            $('#status').text('Sending data...');
+            Fingerprint.submit('/post',function error()
             {
                 $('#init').fadeIn('fast');
-                alert('There was an error');
+                $('#status').text('Something went wrong, we are sorry for the inconvinience! Please try again later.')
+                            .removeClass().addClass('orange');
+                $('#share').fadeOut('fast',function(){
+                  $(this).css('display','')
+                         .css('visibility','hidden');
+                });
+      
             },
-            function()
+            function success()
             {
                 $('#init').fadeOut('fast');
                 $('#fingerprint').children().remove('table.obj');
@@ -51,12 +64,17 @@
       {
         var status = Fingerprint.status.get();
         $('#status').text(status);
-        if( status != 'Done' )
-          setTimeout(updateStatus,100);
       }
       function info()
       {
-        $('#info').fadeToggle('fast');
+        if ( !$('#info:visible').length )
+        {
+          $('#info').fadeIn('fast').load('/info',function(response, status, xhr)
+          { 
+            $(this).children().addClass('done');
+          });
+        }
+        else $('#info').fadeOut('fast');
         return false;
       }
 
@@ -77,23 +95,11 @@
 	Upon clicking Share, you agree to letting us store information about your browser. <br/>
 	Burt AB is in no way affiliated with this webpage. <a href="#" onclick="info()" />More info</a>.
       </p>
-      <div id="status"></div>
+      <div id="status" class="audit"></div>
     </div>
 
     <div id="info">
-      <p>
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula
-	pellentesque eleifend. Morbi hendrerit nibh sed diam bibendum non
-	commodo arcu pulvinar. In pharetra erat eget purus accumsan
-	imperdiet. Aliquam erat volutpat. Lorem ipsum dolor sit amet,
-	consectetur adipiscing elit. Donec eu iaculis purus. Integer eleifend
-	fringilla scelerisque. Duis placerat dapibus mi nec tempor. Morbi sit
-	amet vestibulum dui. Vivamus nisl nulla, vulputate ut pharetra id,
-	dapibus sit amet odio. Curabitur interdum congue massa, non ultricies
-	purus pretium vitae. In accumsan, velit vitae suscipit fringilla, elit
-	enim fringilla neque, venenatis cursus felis tellus vel ligula. Ut enim
-	eros, imperdiet ac dignissim a, mattis et urna.
-      </p>
+      <div><p>&nbsp;</p></div>
     </div>
 
     <div id="thanks">
