@@ -65,81 +65,6 @@ var Fingerprint = (function()
     };
 
     return {
-
-	/**
-	 * Provides functions for getting and setting textual status, as well as
-	 * determining whether the scripts have completed.
-	 **/
-	status : (function()
-		  { 
-		      var pending = -1,
-		          status  = [];
-		      return {
-			  add      : function(msg) 
-			  { 
-			      status.push(msg); 
-			      pending = Math.max(pending+1,1);
-			      this.onChange();
-			  },
-			  done     : function() 
-			  { 
-			      status.shift(); 
-			      pending--;
-			      this.onChange();
-			      if ( this.isDone() ) Fingerprint.onFinish();
-			  },
-			  isDone   : function() 
-			  { 
-			      return pending === 0 && Fingerprint.events.isEmpty(); 
-			  },
-			  onChange : function() {},
-			  get      : function() 
-			  {
-			      if ( pending > 0 ) 
-				  return status[status.length-1];
-			      else if ( Fingerprint.events.isEmpty() )
-				  return 'Done';
-			      else
-				  return 'Waiting';
-			  }
-		      };
-		  })(),
-
-	/**
-	 * An event queue which runs events on demand and updates
-	 * Fingerprint.status accordingly. Add events by
-	 * Fingerprint.events.add(function,[arg1,arg2,...]) and run all with
-	 * Fingerprint.events.run().
-	 **/
-	events : (function()
-		  {
-		      var eventQueue = [];
-		      return {
-			  add    : function(event,args) 
-			  { 
-			      if ( args === undefined ) args = [];
-			      eventQueue.push({ event : event, args : args}); 
-			      return this; 
-			  },
-			  exec   : function() 
-			  { 
-			      if ( eventQueue.length > 0 )
-			      {
-				  var event = eventQueue.shift();
-				  Fingerprint.status.add('Triggering event');
-				  event.event.apply(Fingerprint,event.args);
-				  Fingerprint.status.done();
-				  return true;
-			      }
-			      else return false;		
-			  },
-			  run     : function () { while ( this.exec() ) {} },
-			  isEmpty : function() 
-			  { 
-			      return !eventQueue.length; 
-			  }	
-		      };
-		  })(),
 	
 	/**
 	 * Initializes the Fingerprint and collects basic info from DOM. Also
@@ -214,6 +139,16 @@ var Fingerprint = (function()
 	    }
 	},
 
+	/**
+	 * Initalize flash to set LSO and retrieve system fonts.
+	 **/
+	initFlash : function(url)
+	{
+	    if ( $('#FingerprintFlash').length === 0 )
+		$('body').prepend( $('<div>').attr('id','FingerprintFlash') );
+	    swfobject.embedSWF(url, 'FingerprintFlash', '0', '0', '9.0.0');
+	    this.status.add('Searching for installed fonts');
+	},
 	
 	/**
 	 * Updates the list of installed plugins; from the DOM if not IE and by
@@ -415,19 +350,6 @@ var Fingerprint = (function()
 	    $.get(url,testRTT(new Date().getTime(),k-1,this));
 	    this.status.add('Sending RTT request no. ' + (K-k+1));
 	},
-	
-	/**
-	 * This function should not be called manually, it is used by Fonts.swf.
-	 **/
-	updateFonts : function(fonts){ fingerprint.fonts = fonts; this.status.done(); },
-	
-	/**
-	 * Set new timestamp for Fingerprint.
-	 **/
-	updateTimestamp : function()
-	{ 
-	    fingerprint.timestamp = new Date().getTime(); 
-	},
 
 	/**
 	 * Submit the Fingerprint as JSON by an AJAX request to url. error and
@@ -444,6 +366,24 @@ var Fingerprint = (function()
 		error: error,
 		success: success
 	    });
+	},
+
+	/**
+	 * onFinish(callback) executes callback upon script completion or
+	 * immediatly if already finished.
+	 **/
+	onFinish : function(callback)
+	{
+	    if ( this.status.isDone() ) callback();
+	    else this.onFinish = callback;
+	},
+
+	/**
+	 * Return the UID (from cookie, local storage or LSO).
+	 **/
+	getUID : function()
+	{
+	    return fingerprint.uid;
 	},
 
 	/**
@@ -494,33 +434,79 @@ var Fingerprint = (function()
 	},
 
 	/**
-	 * Initalize flash to set LSO and retrieve system fonts.
+	 * Provides functions for getting and setting textual status, as well as
+	 * determining whether the scripts have completed.
 	 **/
-	initFlash : function(url)
-	{
-	    if ( $('#FingerprintFlash').length === 0 )
-		$('body').prepend( $('<div>').attr('id','FingerprintFlash') );
-	    swfobject.embedSWF(url, 'FingerprintFlash', '0', '0', '9.0.0');
-	    this.status.add('Searching for installed fonts');
-	},
+	status : (function()
+		  { 
+		      var pending = -1,
+		          status  = [];
+		      return {
+			  add      : function(msg) 
+			  { 
+			      status.push(msg); 
+			      pending = Math.max(pending+1,1);
+			      this.onChange();
+			  },
+			  done     : function() 
+			  { 
+			      status.shift(); 
+			      pending--;
+			      this.onChange();
+			      if ( this.isDone() ) Fingerprint.onFinish();
+			  },
+			  isDone   : function() 
+			  { 
+			      return pending === 0 && Fingerprint.events.isEmpty(); 
+			  },
+			  onChange : function() {},
+			  get      : function() 
+			  {
+			      if ( pending > 0 ) 
+				  return status[status.length-1];
+			      else if ( Fingerprint.events.isEmpty() )
+				  return 'Done';
+			      else
+				  return 'Waiting';
+			  }
+		      };
+		  })(),
 
 	/**
-	 * onFinish(callback) executes callback upon script completion or
-	 * immediatly if already finished.
+	 * An event queue which runs events on demand and updates
+	 * Fingerprint.status accordingly. Add events by
+	 * Fingerprint.events.add(function,[arg1,arg2,...]) and run all with
+	 * Fingerprint.events.run().
 	 **/
-	onFinish : function(callback)
-	{
-	    if ( this.status.isDone() ) callback();
-	    else this.onFinish = callback;
-	},
-
-	/**
-	 * Return the UID (from cookie, local storage or LSO).
-	 **/
-	getUID : function()
-	{
-	    return fingerprint.uid;
-	},
+	events : (function()
+		  {
+		      var eventQueue = [];
+		      return {
+			  add    : function(event,args) 
+			  { 
+			      if ( args === undefined ) args = [];
+			      eventQueue.push({ event : event, args : args}); 
+			      return this; 
+			  },
+			  exec   : function() 
+			  { 
+			      if ( eventQueue.length > 0 )
+			      {
+				  var event = eventQueue.shift();
+				  Fingerprint.status.add('Triggering event');
+				  event.event.apply(Fingerprint,event.args);
+				  Fingerprint.status.done();
+				  return true;
+			      }
+			      else return false;		
+			  },
+			  run     : function () { while ( this.exec() ) {} },
+			  isEmpty : function() 
+			  { 
+			      return !eventQueue.length; 
+			  }	
+		      };
+		  })(),
 
 	/**
 	 * Update UID.
@@ -531,6 +517,19 @@ var Fingerprint = (function()
 	    {
 		fingerprint.uid = uid;
 	    }
+	},
+	
+	/**
+	 * This function should not be called manually, it is used by Fonts.swf.
+	 **/
+	updateFonts : function(fonts){ fingerprint.fonts = fonts; this.status.done(); },
+	
+	/**
+	 * Set new timestamp for Fingerprint.
+	 **/
+	updateTimestamp : function()
+	{ 
+	    fingerprint.timestamp = new Date().getTime(); 
 	}
     };
 })();
