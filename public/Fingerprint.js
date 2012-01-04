@@ -1,13 +1,53 @@
 /**
+ * Description: 
+ * 
+ *   Fingerprint is a singleton object designed to produce a browser fingerprint
+ *   by exctracting attributes from the DOM and other client information. 
+ * 
  * Dependencies:
- *  - JQuery (>= 1.6.4)
- *  - JQuery.JSON (>= 2.3)
- *  - swfobject.js
- *  - Fonts.sfw
+ * 
+ *   - JQuery (>= 1.6.4)
+ *   - JQuery.JSON (>= 2.3)
+ *   - (swfobject.js  - used by Fingerprint.initFlash())
+ *   - (Fonts.sfw - used by Fingerprint.initFlash())
+ *
+ * Usage:
+ * 
+ *   1. The object is initialized by calling Fingerprint.init().  
+ *
+ *   2. Optionally add onFinish event handler by calling Fingerprint.onFinish(handler).
+ *
+ *   3. Optionally more information can be gathered by either calling the
+ *   auxiliary functions directly or by adding them to the event queue by
+ *   calling Fingerprint.events.add(Fingerprint.updateRTT,[k,url]), followed by
+ *   Fingerprint.events.run().
+ *
+ *  4. Generate a DOM representation of the Fingerprint by calling
+ *  Fingerprint.generateDOM().
+ *
+ *  5. Submit the Fingerprint (via AJAX) by calling
+ *  Fingerprint.submit(url,error,success).
+ * 
+ * Example:
+ *
+ * Fingerprint.init();
+ * Fingerprint.onFinish(Fingerprint.submit('/url',error,success));
+ * Fingerprint.events.add(Fingerprint.updateRTT,[10,'/url'])
+ *                   .add(Fingerprint.initFlash,['/Fonts.swf'])
+ *                   .run();
+ *
+ * // The above example collects info from the DOM, RTT and Flash. When all
+ * // scripts are complete, the Fingerprint is submitted to '/url' by the
+ * // onFinish event handler.
+ *
 **/
 var Fingerprint = (function()
 {
 
+    /**
+     * The actual fingerprint object, private object that is only accessible
+     * through the API.
+     **/
     var fingerprint =
     {
 	ip               : undefined,
@@ -26,6 +66,10 @@ var Fingerprint = (function()
 
     return {
 
+	/**
+	 * Provides functions for getting and setting textual status, as well as
+	 * determining whether the scripts have completed.
+	 **/
 	status : (function()
 		  { 
 		      var pending = -1,
@@ -61,6 +105,12 @@ var Fingerprint = (function()
 		      };
 		  })(),
 
+	/**
+	 * An event queue which runs events on demand and updates
+	 * Fingerprint.status accordingly. Add events by
+	 * Fingerprint.events.add(function,[arg1,arg2,...]) and run all with
+	 * Fingerprint.events.run().
+	 **/
 	events : (function()
 		  {
 		      var eventQueue = [];
@@ -91,6 +141,10 @@ var Fingerprint = (function()
 		      };
 		  })(),
 	
+	/**
+	 * Initializes the Fingerprint and collects basic info from DOM. Also
+	 * adds the fields from data (optional) to the fingerprint.
+	 **/
 	init : function(data)
 	{
 	    if ( data )
@@ -161,6 +215,10 @@ var Fingerprint = (function()
 	},
 
 	
+	/**
+	 * Updates the list of installed plugins; from the DOM if not IE and by
+	 * ActiveX if IE.
+	 **/
 	updatePlugins : function()
 	{
 	    function getPlugins()
@@ -358,13 +416,23 @@ var Fingerprint = (function()
 	    this.status.add('Sending RTT request no. ' + (K-k+1));
 	},
 	
+	/**
+	 * This function should not be called manually, it is used by Fonts.swf.
+	 **/
 	updateFonts : function(fonts){ fingerprint.fonts = fonts; this.status.done(); },
 	
+	/**
+	 * Set new timestamp for Fingerprint.
+	 **/
 	updateTimestamp : function()
 	{ 
 	    fingerprint.timestamp = new Date().getTime(); 
 	},
 
+	/**
+	 * Submit the Fingerprint as JSON by an AJAX request to url. error and
+	 * success are callback functions.
+	 **/
 	submit : function(url,error,success)
 	{
 	    this.updateTimestamp();
@@ -378,6 +446,9 @@ var Fingerprint = (function()
 	    });
 	},
 
+	/**
+	 * Returns a DOM representation of the Fingerprint.
+	 **/
 	generateDOM : function()
 	{
 	    function display_obj(obj)
@@ -422,6 +493,9 @@ var Fingerprint = (function()
 	    return  display_obj(fingerprint);
 	},
 
+	/**
+	 * Initalize flash to set LSO and retrieve system fonts.
+	 **/
 	initFlash : function(url)
 	{
 	    if ( $('#FingerprintFlash').length === 0 )
@@ -430,17 +504,27 @@ var Fingerprint = (function()
 	    this.status.add('Searching for installed fonts');
 	},
 
+	/**
+	 * onFinish(callback) executes callback upon script completion or
+	 * immediatly if already finished.
+	 **/
 	onFinish : function(callback)
 	{
 	    if ( this.status.isDone() ) callback();
 	    else this.onFinish = callback;
 	},
 
+	/**
+	 * Return the UID (from cookie, local storage or LSO).
+	 **/
 	getUID : function()
 	{
 	    return fingerprint.uid;
 	},
 
+	/**
+	 * Update UID.
+	 **/
 	updateUID : function(uid)
 	{
 	    if ( uid != fingerprint.uid )
