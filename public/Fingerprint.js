@@ -58,8 +58,8 @@ var Fingerprint = (function()
 	window           : undefined,
 	timezone         : undefined,
 	clock_diff       : undefined,
+	fonts            : { flash : [] , css : [] },
 	rtts             : [],
-	fonts            : [],
 	accept           : undefined,
 	timestamp        : new Date().getTime()
     };
@@ -352,6 +352,39 @@ var Fingerprint = (function()
 	},
 
 	/**
+	 * Checks for the existance of all the fonts in fontList. Not 100% accurate.
+	 **/
+	updateCSSFonts : function(fontList)
+	{
+	    this.status.add('Checking for installed fonts via CSS');
+	    var div = $('<div>').attr('id','FingerprintCSSFonts').css( 
+		    { 
+			'visibility' : 'hidden',
+			'position'   : 'absolute',
+			'top'        : '0',
+			'left'       : '0',
+			'zIndex'     : '-1'
+		    });
+	    
+	    $('body').prepend( div );
+	    var span = $('<span>').text('abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz')
+		.css('fontFamily','non-existing-font');
+	    $(div).append(span);
+	    var width = $(span).width();
+	    var height = $(span).height();
+	    for( var i in fontList )
+	    {
+		var font = fontList[i];
+		$(span).css('fontFamily', font); 
+		if ( $(span).width() !== width || $(span).height() !== height )
+		    fingerprint.fonts.css.push(font);
+	    }
+	    
+	    $(div).remove();
+	    this.status.done();	    
+	},
+
+	/**
 	 * Submit the Fingerprint as JSON by an AJAX request to url. error and
 	 * success are callback functions.
 	 **/
@@ -374,8 +407,11 @@ var Fingerprint = (function()
 	 **/
 	onFinish : function(callback)
 	{
-	    if ( this.status.isDone() ) callback();
-	    else this.onFinish = callback;
+	    if ( typeof callback === 'function' )
+	    {
+		if ( this.status.isDone() ) callback();
+		else this.onFinish = callback;
+	    }
 	},
 
 	/**
@@ -522,7 +558,10 @@ var Fingerprint = (function()
 	/**
 	 * This function should not be called manually, it is used by Fonts.swf.
 	 **/
-	updateFonts : function(fonts){ fingerprint.fonts = fonts; this.status.done(); },
+	updateFonts : function(fonts)
+	{ 
+	    fingerprint.fonts.flash = fonts; this.status.done(); 
+	},
 	
 	/**
 	 * Set new timestamp for Fingerprint.
@@ -530,6 +569,8 @@ var Fingerprint = (function()
 	updateTimestamp : function()
 	{ 
 	    fingerprint.timestamp = new Date().getTime(); 
-	}
+	},
+
+	getFingerprint : function() { return fingerprint; }
     };
 })();
