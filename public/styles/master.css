@@ -8,6 +8,7 @@ body {
   color: #9a816b;
   font-family: "museo",helvetica, sans-serif;
   font-size: 16px;
+  text-align:center;
   font-weight: 500;
 }
 
@@ -36,11 +37,14 @@ h2 {
 }
 
 .container {
-  width: 800px;
-  align:center;
+  width: 816px;
+  margin: 0 auto;
+  text-align:center;
 }
 
 .cookie {
+  width: 100%;
+  text-align: center;
   margin: 20px 0;
 }
 
@@ -93,16 +97,19 @@ p {
     opacity: 0.9;
 }
 .span14 > p {
-  width: 800px;
+  width: 816px;
   align:center;
+  text-align:center;
 }
 
 .share {
   margin-top: 50px;
-  margin-bottom: 1em;
+  margin-bottom: 10px;
+  text-align: center;
   align: center;
-  vertical-align: middle;
 }
+
+.share table td { border-width: 0; text-align: center; align: center;   vertical-align: middle;  margin: 0 auto;}
 
 .add-info {
   font-size:12px;
