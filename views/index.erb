@@ -12,9 +12,65 @@
       Fingerprint.init(tmp);
     </script>
     <script type="text/javascript" src="/takeabite.js"></script>
-    <title>Take a bite</title>
-  </head>
+    <title>TAKE A BITE</title>
+<!--    <link rel="stylesheet" type="text/css" href="/style.css" /> -->
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/master.css" rel="stylesheet">
+ </head>
   <body>
-    <div id="status"></div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  // Facebook
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+  // Google +1
+  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+  po.src = 'https://apis.google.com/js/plusone.js';
+  js.parentNode.insertBefore(po,js);
+  }(document, 'script', 'facebook-jssdk'));
+
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+    <div class="container" id="init">
+      <div class="content">
+        <div class="page-header">
+          <h1>Take a Bite!</h1>
+        </div>
+        <div class="row">
+          <div class="span14" style="display:inline-block">
+            <p>Today, most webpages use cookies to keep track of and
+              identify its users. We're trying to find a less
+              intrusive method than cookies; a method which does not
+              store information on your computer. We need your help to
+              gather browser data, help us by clicking the button
+              below and take a bite of the cookie!
+          </div>
+          <div class="span14 cookie">
+            <img src="img/cookie.png" alt="Take a Bite!" />
+          </div>
+          <div class="span14" id="sharediv">
+	    <div id="status" style="padding-top:20px; display:none" >Nom nom nom...</div>
+	    <img src="/img/ajax-loader.gif" style="display:none" id="loading"/>
+            <a href="#" onClick="submit();return false;" class="btn primary" id="share" style="width:400px;">Sure, I'll have a bite!</a>
+	    <div id="error" style="color:#ee614b;padding-top: 20px; display:none">Something went wrong, we are sorry for the inconvinience! Please try again later.</div>
+          </div>
+          <div class="span14 share">
+	    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+	    <g:plusone></g:plusone>
+	    <div class="fb-like" data-href="http://exjob02.byburt.com" data-send="false" data-layout="standard" data-width="0" data-show-faces="true" data-font="arial"></div>
+          </div>
+	  <div class="add-info">
+	     This webpage is part of a master's thesis project at Chalmers
+               University of Technology. <br>For more information, please contact <i>ferik (at) student (dot) chalmers (dot) se</i>
+	  </div>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
   </body>
 </html>

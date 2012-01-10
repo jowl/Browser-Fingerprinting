@@ -2,14 +2,13 @@
 
 $(function(){
 
-    Fingerprint.events.add(Fingerprint.updateRTT,[10,'/time'])
-                      .add(Fingerprint.initFlash,['/Fonts.swf'])
+    //Fingerprint.status.onChange = updateStatus;
+
+    Fingerprint.events.add(Fingerprint.initFlash,['/Fonts.swf'])
                       .add(Fingerprint.updatePlugins,[])
                       .add(Fingerprint.updateCSSFonts,[cssFontList])
+	              .add(Fingerprint.updateRTT,[10,'/time'])
                       .run();
-
-    Fingerprint.status.onChange = updateStatus;
-
 });
 
 
@@ -21,7 +20,10 @@ function submit()
 {
 
     /* hide button and show loading bar here */
-
+    $('#share').hide();
+    $('#status').show();
+    $('#loading').show();
+    $('#error').hide();
     statusTimeout = setTimeout(onFinish,10000);
     Fingerprint.onFinish(onFinish);
 
@@ -35,15 +37,15 @@ function onFinish()
 
     $('#status').text('Sending data...');
     Fingerprint.submit(
-	'/post',
+	'/pot',
 	function error()
 	{
+	    Fingerprint.status.onChange = updateStatus;
+	    $('#status').hide();
+	    $('#loading').hide();
+	    $('#error').show();
 	    /* show error msg (highlight) and return to start page here */
-
-	    $('#status').text('Something went wrong, we are sorry for the inconvinience! Please try again later.');
-
-	});
-	    
+    
         },
 	function success()
         {
@@ -55,6 +57,7 @@ function onFinish()
 
 function updateStatus()
 {
-    var status = Fingerprint.status.get();
-    $('#status').text(status);
+    /*	var status = Fingerprint.status.get();
+	$('#status').text(status); */
+    
 }

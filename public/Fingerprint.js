@@ -48,6 +48,7 @@ var Fingerprint = (function()
      * The actual fingerprint object, private object that is only accessible
      * through the API.
      **/
+
     var fingerprint =
     {
 	ip               : undefined,

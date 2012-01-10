@@ -1,0 +1,100 @@
+html, body {
+  background-color: #dacfc5;
+}
+
+body {
+  padding-top: 100px;
+  -webkit-font-smoothing: antialiased;
+  color: #9a816b;
+  font-family: "museo",helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.page-header {
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+h1 {
+  padding: 20px 0;
+  font-family: "sniglet", helvetica, sans-serif;
+  font-size: 86px;
+  font-weight: 400;
+  color: #6c4c2f;
+  -webkit-mask: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0.7)),to(rgba(0,0,0,1)));
+}
+
+.container {
+  width: 800px;
+  align:center;
+}
+
+.cookie {
+  margin: 20px 0;
+}
+
+.row, .span14 {
+  text-align: center;   
+}
+
+p {
+  font-size: 16px;
+  text-align: center; 
+  align:center;
+  font-weight: 500;
+}
+
+.btn.primary {
+    background-color: #725133;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#725133), to(#533b25));
+    background-image: -moz-linear-gradient(top, #725133, #533b25);
+    background-image: -ms-linear-gradient(top, #725133, #533b25);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #725133), color-stop(100%, #533b25));
+    background-image: -webkit-linear-gradient(top, #725133, #533b25);
+    background-image: -o-linear-gradient(top, #725133, #533b25);
+    background-image: linear-gradient(top, #725133, #533b25);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#049cdb', endColorstr='#0064cd', GradientType=0);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+  
+.btn {
+  font-family: "sniglet",sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  padding-top:14px;
+  padding-bottom:14px;
+  background-color: #725133;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#725133), color-stop(25%, #725133), to(#533b25));
+  background-image: -webkit-linear-gradient(#725133, #725133 25%, #533b25);
+  background-image: -moz-linear-gradient(top, #725133, #725133 25%, #533b25);
+  background-image: -ms-linear-gradient(#725133, #725133 25%, #533b25);
+  background-image: -o-linear-gradient(#725133, #725133 25%, #533b25);
+  background-image: linear-gradient(#725133, #725133 25%, #533b25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#725133', endColorstr='#533b25', GradientType=0);
+}
+
+.btn:hover {
+    background-position: 0 0;
+    opacity: 0.9;
+}
+.span14 > p {
+  width: 800px;
+  align:center;
+}
+
+.share {
+  margin-top: 150px;
+  margin-bottom: 50px;
+  align: center;
+  vertical-align: middle;
+}
+
+.add-info {
+  font-size:12px;
+}
+
