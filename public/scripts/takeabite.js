@@ -11,6 +11,7 @@ $(function(){
                       .add(Fingerprint.updateCSSFonts,[cssFontList])
 	              .add(Fingerprint.updateRTT,[10,'/time'])
                       .run();
+
 });
 
 
