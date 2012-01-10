@@ -55,14 +55,18 @@
           </div>
 
           <div class="span14" id="sharediv" style="height:100px;position:relative;">
+
+            <a href="#" onClick="submit();return false;" class="btn primary" id="share">Sure, I'll have a bite!</a>
+
 	    <div id="loading" style="display:none;position:absolute;z-index:2;top:0;left:0;width:100%">
 	      <div id="status">Nom nom nom...</div>
 	      <img src="/img/ajax-loader.gif" />
 	    </div>
-            <a href="#" onClick="submit();return false;" class="btn primary" id="share">Sure, I'll have a bite!</a>
+
 	    <div id="error" style="color:#dd513b;display:none;position:absolute;z-index:4;top:0;left:0;width:100%;">
 	      Something went wrong, we are sorry for the inconvinience! Please try again later.
 	    </div>
+
 	    <div id="thanks" style="display:none;position:absolute;z-index:3;top:0;left:0;width:100%">
 	      <h2>Thank you!</h2>
 	      <p>
@@ -72,16 +76,23 @@
 		bite.
 	      </p>
 	    </div>
+
           </div>
 
-          <table class="span14 share">
-	    <tr>
-	      <td style="width:260px"></td>
-	    <td><div class="fb-like" data-href="http://exjob02.byburt.com" data-send="false" data-layout="button_count" data-width="0" data-show-faces="false" data-font="arial"></div></td>
-	    <td><a href="https://twitter.com/share" class="twitter-share-button"></a></td>
-	    <td style="width:260px"></td>
-	    </tr>
-          </table>
+          <div class="span14 share">
+	    <table>
+	      <tr>
+		<td style="width:268" />
+		<td>
+		  <div class="fb-like" data-href="http://exjob02.byburt.com" data-send="false" data-layout="box_count" data-width="0" data-show-faces="false" data-font="arial"></div>
+		</td>
+		<td>
+		  <a href="https://twitter.com/share" class="twitter-share-button"></a>
+		</td>
+		<td style="width:268" />
+	      </tr>
+	    </table>
+          </div>
 
 	  <div class="add-info" style="clear:both">
 	     This webpage is part of a master's thesis project at Chalmers University of Technology. <br />
