@@ -145,18 +145,19 @@ var Fingerprint = (function()
 	 **/
 	initFlash : function(url)
 	{
-	    var callback = function(success,id,ref)
+	    var callback = function(data)
 	    {
-		if ( !success )
+		if ( !data.success )
 		{
-		    this.status.done();
+		    Fingerprint.status.done();
 		}
 	    }
 	    if ( $('#FingerprintFlash').length === 0 )
 		$('body').prepend( $('<div>').attr('id','FingerprintFlash') );
-	    swfobject.embedSWF(url, 'FingerprintFlash', '0', '0', '9.0.0',
-			       undefined,undefined,undefined,callback);
 	    this.status.add('Searching for installed fonts');
+	    swfobject.embedSWF(url, 'FingerprintFlash', '0', '0', '9.0.0',
+			       undefined,undefined,undefined,undefined,callback);
+	 
 	},
 	
 	/**

@@ -2,7 +2,9 @@
 
 $(function(){
 
-    //Fingerprint.status.onChange = updateStatus;
+     Fingerprint.init(tmp);
+
+ //   Fingerprint.status.onChange = updateStatus;
 
     Fingerprint.events.add(Fingerprint.initFlash,['/scripts/Fonts.swf'])
                       .add(Fingerprint.updatePlugins,[])
@@ -22,7 +24,7 @@ function submit()
     /* hide button and show loading bar here */
     $('#share').hide();
     $('#loading').show();
-    statusTimeout = setTimeout(onFinish,10000);
+//    statusTimeout = setTimeout(onFinish,10000);
     Fingerprint.onFinish(onFinish);
 
 }
@@ -57,7 +59,7 @@ function onFinish()
 
 function updateStatus()
 {
-    /*	var status = Fingerprint.status.get();
-	$('#status').text(status); */
+    	var status = Fingerprint.status.get();
+	$('#status').text(status); 
     
 }
