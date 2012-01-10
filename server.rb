@@ -7,16 +7,12 @@ require 'active_support/all'
 require 'sinatra/base'
 require 'json-schema'
 require 'rack/accept'
-require 'rack/cache'
 require './lang.rb'
 require 'net/http'
 
 class Server < Sinatra::Base
 
   use Rack::Accept
-  use Rack::Cache
-
-  set :static_cache_control, [:public, :max_age => 3600]
 
   # Get index.htm
   get %r{/(en|sv)?$} do |lang|
