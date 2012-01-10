@@ -14,7 +14,7 @@ require 'net/http'
 class Server < Sinatra::Base
 
   use Rack::Accept
-  user Rack::Cache
+  use Rack::Cache
 
   set :static_cache_control, [:public, :max_age => 3600]
 
