@@ -23,9 +23,8 @@ function submit()
 {
 
     /* hide button and show loading bar here */
-    $('#share').hide();
-    $('#loading').show();
-//    statusTimeout = setTimeout(onFinish,10000);
+    $('#share,#loading').fadeToggle('fast');
+    statusTimeout = setTimeout(onFinish,10000);
     Fingerprint.onFinish(onFinish);
 
 }
@@ -42,16 +41,16 @@ function onFinish()
 	function error()
 	{
 	    Fingerprint.status.onChange = updateStatus;
-	    $('#loading').hide();
-	    $('#error').show();
+	    $('#loading,#error').fadeToggle('fast');
 	    /* show error msg (highlight) and return to start page here */
     
         },
 	function success()
         {
-	    $('#loading').hide();
-	    $('#thanks').show();
-	    $('#cookie').attr('src','/img/cookie_eaten.png');
+	    setTimeout(function(){
+		$('#thanks,#loading').fadeToggle('fast');
+		$('#cookie').attr('src','/img/cookie_eaten.png');
+	    },1000);
 	    /* show thank you message here */
         }
     );

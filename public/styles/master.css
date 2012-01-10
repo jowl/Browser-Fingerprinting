@@ -20,7 +20,7 @@ body {
 h1 {
   padding: 20px 0;
   font-family: "sniglet", helvetica, sans-serif;
-  font-size: 80px;
+  font-size: 72px;
   font-weight: 400;
   color: #6c4c2f;
   -webkit-mask: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0.7)),to(rgba(0,0,0,1)));
@@ -28,8 +28,8 @@ h1 {
 
 h2 {
   font-family: "sniglet", helvetica, sans-serif;
-  font-size: 68px;
-  line-height: 80px;
+  font-size: 40px;
+  line-height: 50px;
   font-weight: 400;
   color: #6c4c2f;
   -webkit-mask: -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0.7)),to(rgba(0,0,0,1)));
