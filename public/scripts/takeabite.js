@@ -1,6 +1,6 @@
 /** Post-DOM ******************************************************************/
 
-$(function(){
+onload = function(){
 
      Fingerprint.init(tmp);
 
@@ -12,7 +12,7 @@ $(function(){
 	              .add(Fingerprint.updateRTT,[10,'/time'])
                       .run();
 
-});
+};
 
 
 /** Functions *****************************************************************/
