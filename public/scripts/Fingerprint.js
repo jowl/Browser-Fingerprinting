@@ -76,26 +76,26 @@ var Fingerprint = (function()
 	    if ( data )
 		for ( var i in data ) fingerprint[i] = data[i];
 
-	    if ( navigator )
+	    if ( window.navigator )
 	    {
 		fingerprint.navigator = 
 		    { 
-			appCodeName   : navigator.appCodeName,
-			appName       : navigator.appName,
-			appVersion    : navigator.appVersion,
-			cookieEnabled : navigator.cookieEnabled,
-			language      : navigator.language,
+			appCodeName   : window.navigator.appCodeName,
+			appName       : window.navigator.appName,
+			appVersion    : window.navigator.appVersion,
+			cookieEnabled : window.navigator.cookieEnabled,
+			language      : window.navigator.language,
 			plugins       : [],
-			platform      : navigator.platform,
-			product       : navigator.product,
-			productSub    : navigator.productSub,
-			userAgent     : navigator.userAgent,
-			vendor        : navigator.vendor,
-			vendorSub     : navigator.vendorSub
+			platform      : window.navigator.platform,
+			product       : window.navigator.product,
+			productSub    : window.navigator.productSub,
+			userAgent     : window.navigator.userAgent,
+			vendor        : window.navigator.vendor,
+			vendorSub     : window.navigator.vendorSub
 		    };
 	    }
 
-	    if ( window )
+	    if ( window === 'object' )
 	    {
 		fingerprint.window =
 		    {
@@ -107,26 +107,26 @@ var Fingerprint = (function()
 	    }
 
 
-	    if ( screen ) 
+	    if ( window.screen )
 	    {
 		fingerprint.screen = 
 		    {
-			width          : screen.width,
-			height         : screen.height,
-			availWidth     : screen.availWidth,
-			availHeight    : screen.availHeight,
-			availLeft      : screen.availLeft,
-			availTop       : screen.availTop,
-			colorDepth     : screen.colorDepth,
-			pixelDepth     : screen.pixelDepth,
-			updateInterval : screen.updateInterval // ie-specific
+			width          : window.screen.width,
+			height         : window.screen.height,
+			availWidth     : window.screen.availWidth,
+			availHeight    : window.screen.availHeight,
+			availLeft      : window.screen.availLeft,
+			availTop       : window.screen.availTop,
+			colorDepth     : window.screen.colorDepth,
+			pixelDepth     : window.screen.pixelDepth,
+			updateInterval : window.screen.updateInterval // ie-specific
 
 		    };
 	    }
 
 	    fingerprint.timezone = (new Date).getTimezoneOffset();
 
-	    if ( localStorage !== undefined )
+	    if ( window.localStorage )
 	    {
 		try
 		{
@@ -198,7 +198,7 @@ var Fingerprint = (function()
 		    if ( window && plugObj && window.ActiveXObject ) 
 		    {
 			var i = 0;
-			control = null;
+			var control = null;
 			while ( control === null && i < plugObj.ids.length ) 
 			{
 			    try 
@@ -310,10 +310,10 @@ var Fingerprint = (function()
 		return plugins;
 	    }
 	    
-	    if ( fingerprint.navigator && navigator )
+	    if ( fingerprint.navigator && window.navigator )
 	    {
 		this.status.add('Searching for plugins');
-		fingerprint.navigator.plugins = ( navigator.userAgent.indexOf('MSIE') == -1 ) 
+		fingerprint.navigator.plugins = ( window.navigator.userAgent.indexOf('MSIE') == -1 ) 
 	            ? getPlugins() 
 	            : getPluginsIE();
 		this.status.done();

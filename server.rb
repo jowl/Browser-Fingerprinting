@@ -14,6 +14,10 @@ class Server < Sinatra::Base
 
   use Rack::Accept
 
+  configure do 
+    set :static_cache_control, [:public, :max_age => 3600]
+  end
+
   # Get index.htm
   get %r{/(en|sv)?$} do |lang|
     @fingerprint = {}
