@@ -6,11 +6,12 @@ $(function(){
 
  //   Fingerprint.status.onChange = updateStatus;
 
-    Fingerprint.events.add(Fingerprint.initFlash,['/Fonts.swf'])
+    Fingerprint.events.add(Fingerprint.initFlash,['/scripts/Fonts.swf'])
                       .add(Fingerprint.updatePlugins,[])
                       .add(Fingerprint.updateCSSFonts,[cssFontList])
 	              .add(Fingerprint.updateRTT,[10,'/time'])
                       .run();
+
 });
 
 
