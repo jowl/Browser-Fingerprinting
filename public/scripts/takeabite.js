@@ -49,9 +49,11 @@ function onFinish()
         },
 	function success()
         {
-	    $('#loading').hide();
-	    $('#thanks').show();
-	    $('#cookie').attr('src','/img/cookie_eaten.png');
+	    setTimeout(function(){
+		$('#loading').hide();
+		$('#thanks').show();
+		$('#cookie').attr('src','/img/cookie_eaten.png');
+	    },1000);
 	    /* show thank you message here */
         }
     );
