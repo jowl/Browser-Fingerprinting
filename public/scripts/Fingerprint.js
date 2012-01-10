@@ -126,7 +126,7 @@ var Fingerprint = (function()
 
 	    fingerprint.timezone = (new Date).getTimezoneOffset();
 
-	    if ( localStorage )
+	    if ( localStorage !== undefined )
 	    {
 		try
 		{
