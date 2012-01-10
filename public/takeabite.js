@@ -7,14 +7,8 @@ $(function(){
     Fingerprint.events.add(Fingerprint.initFlash,['/Fonts.swf'])
                       .add(Fingerprint.updatePlugins,[])
                       .add(Fingerprint.updateCSSFonts,[cssFontList])
-	              .add(Fingerprint.updateRTT,[2,'/time'])
+	              .add(Fingerprint.updateRTT,[10,'/time'])
                       .run();
-
-    $('#share').hide();
-	    $('#loading').hide();
-	    $('#thanks').show();
-	    $('#cookie').attr('src','/img/cookie_eaten.png');
-
 });
 
 

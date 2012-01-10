@@ -108,3 +108,4 @@ p {
   font-size:12px;
 }
 
+table.share tr td { border-width: 0px; text-align: center; width: 140px; padding: 0;}
