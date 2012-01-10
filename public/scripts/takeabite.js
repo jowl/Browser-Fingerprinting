@@ -1,6 +1,6 @@
 /** Post-DOM ******************************************************************/
 
-onload = function(){
+function init(){
 
      Fingerprint.init(tmp);
 
@@ -12,7 +12,10 @@ onload = function(){
 	              .add(Fingerprint.updateRTT,[10,'/time'])
                       .run();
 
-};
+}
+
+if (window.addEventListener) { w.addEventListener("load", init, false); }
+else if (window.attachEvent) { w.attachEvent("onload",init); }
 
 
 /** Functions *****************************************************************/
