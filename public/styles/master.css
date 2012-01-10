@@ -8,6 +8,7 @@ body {
   color: #9a816b;
   font-family: "museo",helvetica, sans-serif;
   font-size: 16px;
+  text-align:center;
   font-weight: 500;
 }
 
@@ -36,7 +37,7 @@ h2 {
 }
 
 .container {
-  width: 800px;
+  width: 900px;
   align:center;
 }
 
@@ -93,7 +94,7 @@ p {
     opacity: 0.9;
 }
 .span14 > p {
-  width: 800px;
+  width: 900px;
   align:center;
 }
 
