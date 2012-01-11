@@ -99,8 +99,17 @@ p {
 .btn:hover {
     background-position: 0 0;
     opacity: 0.9;
-    filter: alpha(opacity=90);
+    filter: alpha(opacity=90) progid:DXImageTransform.Microsoft.gradient(startColorstr='#725133', endColorstr='#533b25', GradientType=0) progid:DXImageTransform.Microsoft.Alpha(opacity=90);
 }
+
+#share {
+  color: #fff;
+}
+
+#share:hover {
+  color: #fff;
+}
+
 .span14 > p {
   width: 816px;
   align:center;
