@@ -12,11 +12,12 @@ function init(){
 	              .add(Fingerprint.updateRTT,[10,'/time'])
 	              .run();
 
-    alert(window.navigator.userAgent.toLowerCase());
-    if( window.navigator.userAgent.toLowerCase().indexOf('android') > -1 )
-	$('h1,h2').css('-webkit-mask','');
-
 }
+
+$(function(){
+    if( window.navigator.userAgent.toLowerCase().indexOf('android') > -1 )
+	$('h1,h2').css({'-webkit-mask':'none'});
+});
 
 if (window.addEventListener) { window.addEventListener("load", init, false); }
 else if (window.attachEvent) { window.attachEvent("onload",init); }
@@ -61,10 +62,10 @@ function onFinish()
         },
 	function success()
         {
+	    $('#cookie').attr('src','/img/cookie_eaten.png');
 	    $('#loading').fadeToggle('fast',function(){
 		$('#thanks').fadeToggle('fast');
 	    });
-	    $('#cookie').attr('src','/img/cookie_eaten.png');
 	    /* show thank you message here */
         }
     );
