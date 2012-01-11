@@ -386,7 +386,7 @@ var Fingerprint = (function()
 
 	    var checkFont = function(font)
 	    {
-		span.fontFamily = font;
+		span.style.fontFamily = font;
 		if ( span.offsetWidth !== width || span.offsetHeight !== height )
 		    fingerprint.fonts.css.push(font);
 	    };
