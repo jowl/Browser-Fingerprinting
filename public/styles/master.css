@@ -114,7 +114,7 @@ p {
 
 .span14 { width: 816px; }
 
-.span14 > p {
+.span14 p {
   width: 800px;
   align:center;
   text-align:center;
