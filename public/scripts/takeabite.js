@@ -24,12 +24,14 @@ var statusTimeout;
 
 function submit()
 {
-
+    var tmp = 0;
     /* hide button and show loading bar here */
-    $('#share').fadeToggle('fast');
-    $('#loading').fadeToggle('fast',function(){
-	statusTimeout = setTimeout(onFinish,10000);
-	Fingerprint.onFinish(onFinish);
+    $('#share,#loading').fadeToggle('fast',function(){
+	if( tmp > 0 )
+	{
+	    statusTimeout = setTimeout(onFinish,10000);
+	    Fingerprint.onFinish(onFinish);
+	}else tmp++;
     });
 
 }
