@@ -9,9 +9,8 @@ function init(){
     Fingerprint.events.add(Fingerprint.initFlash,['/scripts/Fonts.swf'])
                       .add(Fingerprint.updatePlugins,[])
                       .add(Fingerprint.updateCSSFonts,[cssFontList])
-	              .add(Fingerprint.updateRTT,[10,'/time']);
-
-    $('#cookie').load(function(){Fingerprint.events.run();});
+	              .add(Fingerprint.updateRTT,[10,'/time'])
+	              .run();
 
 }
 
