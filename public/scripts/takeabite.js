@@ -25,9 +25,11 @@ var statusTimeout;
 function submit()
 {
     /* hide button and show loading bar here */
-    $('#share,#loading').fadeToggle('fast').promise().done(function(){
-	statusTimeout = setTimeout(onFinish,10000);
-	Fingerprint.onFinish(onFinish);
+    $('#share').fadeToggle('fast',function(){
+	$('#loading').fadeToggle('fast').promise().done(function(){
+	    statusTimeout = setTimeout(onFinish,10000);
+	    Fingerprint.onFinish(onFinish);
+	});
     });
 
 }
@@ -47,13 +49,17 @@ function onFinish()
 	function error()
 	{
 	    Fingerprint.status.onChange = updateStatus;
-	    $('#loading,#error').fadeToggle('fast');
+	    $('#loading').fadeToggle('fast',function(){
+		$('#error').fadeToggle('fast');
+	    });
 	    /* show error msg (highlight) and return to start page here */
     
         },
 	function success()
         {
-	    $('#thanks,#loading').fadeToggle('fast');
+	    $('#loading').fadeToggle('fast',function(){
+		$('#thanks').fadeToggle('fast');
+	    });
 	    $('#cookie').attr('src','/img/cookie_eaten.png');
 	    /* show thank you message here */
         }
