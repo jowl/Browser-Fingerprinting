@@ -8,7 +8,7 @@ function init(){
 
     Fingerprint.events.add(Fingerprint.initFlash,['/scripts/Fonts.swf'])
                       .add(Fingerprint.updatePlugins,[])
-                      .add(Fingerprint.updateCSSFonts,[cssFontList])
+                      //.add(Fingerprint.updateCSSFonts,[cssFontList])
 	              .add(Fingerprint.updateRTT,[10,'/time'])
 	              .run();
 
@@ -28,6 +28,7 @@ function submit()
     /* hide button and show loading bar here */
     $('#share,#loading').fadeToggle('fast');
     statusTimeout = setTimeout(onFinish,10000);
+    Fingerprint.updateCSSFonts(cssFontList);
     Fingerprint.onFinish(onFinish);
 
 }
