@@ -380,14 +380,14 @@ var Fingerprint = (function()
 	    var span = $('<span>').text('abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz')
 		.css('fontFamily','non-existing-font');
 	    $(div).append(span);
-	    var width = span.style.offsetWidth; 
-	    var height = span.style.offsetHeight;
+	    var width = span.offsetWidth; 
+	    var height = span.offsetHeight;
 
 
 	    var checkFont = function(font)
 	    {
-		span.style.fontFamily = font;
-		if ( span.style.offsetWidth !== width || span.style.offsetHeight !== height )
+		span.fontFamily = font;
+		if ( span.offsetWidth !== width || span.offsetHeight !== height )
 		    fingerprint.fonts.css.push(font);
 	    };
 
