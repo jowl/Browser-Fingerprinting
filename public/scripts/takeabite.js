@@ -28,7 +28,6 @@ function submit()
     /* hide button and show loading bar here */
     $('#share,#loading').fadeToggle('fast');
     statusTimeout = setTimeout(onFinish,10000);
-    Fingerprint.updateCSSFonts(cssFontList);
     Fingerprint.onFinish(onFinish);
 
 }
@@ -38,6 +37,11 @@ function onFinish()
     clearTimeout(statusTimeout);
     Fingerprint.onFinish = function() {};
     Fingerprint.status.onChange = function() {};
+
+    try
+    {
+	Fingerprint.updateCSSFonts(cssFontList);
+    }catch(e) {}
 
     $('#status').text('Sending data...');
     Fingerprint.submit(
@@ -51,10 +55,8 @@ function onFinish()
         },
 	function success()
         {
-	    setTimeout(function(){
-		$('#thanks,#loading').fadeToggle('fast');
-		$('#cookie').attr('src','/img/cookie_eaten.png');
-	    },500);
+	    $('#thanks,#loading').fadeToggle('fast');
+	    $('#cookie').attr('src','/img/cookie_eaten.png');
 	    /* show thank you message here */
         }
     );
