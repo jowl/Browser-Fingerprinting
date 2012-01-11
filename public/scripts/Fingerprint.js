@@ -398,8 +398,7 @@ var Fingerprint = (function()
 		else
 		{
 		    $(div).remove();
-		    Fingerprint.status.done();	    
-
+		    Fingerprint.status.done();
 		}
 
 	    })(fontList);

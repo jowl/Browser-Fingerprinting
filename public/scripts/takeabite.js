@@ -8,8 +8,8 @@ function init(){
 
     Fingerprint.events.add(Fingerprint.initFlash,['/scripts/Fonts.swf'])
                       .add(Fingerprint.updatePlugins,[])
-                      //.add(Fingerprint.updateCSSFonts,[cssFontList])
 	              .add(Fingerprint.updateRTT,[10,'/time'])
+                      .add(Fingerprint.updateCSSFonts,[cssFontList])
 	              .run();
 
 }
@@ -35,7 +35,7 @@ function submit()
     $('#share').fadeToggle('fast',function(){
 	$('#loading').fadeToggle('fast').promise().done(function(){
 	    statusTimeout = setTimeout(onFinish,10000);
-	    Fingerprint.onFinish(onFinish);
+	    setTimeout(function(){Fingerprint.onFinish(onFinish);},500);
 	});
     });
 
@@ -47,9 +47,6 @@ function onFinish()
     Fingerprint.onFinish = function() {};
     Fingerprint.status.onChange = function() {};
 
-    try{ Fingerprint.updateCSSFonts(cssFontList); }
-    catch(e) {}
-
     $('#status').text('Sending data...');
     Fingerprint.submit(
 	'/post',
@@ -60,18 +57,17 @@ function onFinish()
 		$('#error').fadeToggle('fast');
 	    });
 	    /* show error msg (highlight) and return to start page here */
-    
-        },
+	    
+	},
 	function success()
-        {
+	{
 	    $('#cookie').attr('src','/img/cookie_eaten.png');
 	    $('#loading').fadeToggle('fast',function(){
 		$('#thanks').fadeToggle('fast');
 	    });
 	    /* show thank you message here */
-        }
+	}
     );
-
 }
 
 function updateStatus()
