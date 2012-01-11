@@ -384,20 +384,33 @@ var Fingerprint = (function()
 	    var height = span.offsetHeight;
 
 
-	    var checkFont = function(font)
+	    (function checkFont(fontList)
 	    {
-		span.style.fontFamily = font;
-		if ( span.offsetWidth !== width || span.offsetHeight !== height )
-		    fingerprint.fonts.css.push(font);
-	    };
+		if ( fontList.length )
+		{
+		    var font = fontList.pop();
+		    span.style.fontFamily = font;
+		    if ( span.offsetWidth !== width || span.offsetHeight !== height )
+			fingerprint.fonts.css.push(font);
 
-	    for( var i in fontList )
+		    setTimeout(function(){checkFont(fontList)},0);
+		}
+		else
+		{
+		    $(div).remove();
+		    Fingerprint.status.done();	    
+
+		}
+
+	    })(fontList);
+
+/*	    for( var i in fontList )
 	    {
 		checkFont(fontList[i]);
 	    }
 	    
 	    $(div).remove();
-	    this.status.done();	    
+	    this.status.done();*/
 	},
 
 	/**
