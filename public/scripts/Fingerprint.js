@@ -378,7 +378,7 @@ var Fingerprint = (function()
 	    
 	    $('body').prepend( div );
 	    var span = $('<span>').text('abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz')
-		.css('fontFamily','non-existing-font');
+		.css('fontFamily','non-existing-font').get(0);
 	    $(div).append(span);
 	    var width = span.offsetWidth; 
 	    var height = span.offsetHeight;
