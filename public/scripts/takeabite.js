@@ -15,7 +15,6 @@ function init(){
 }
 
 $(function(){
-    var tst = window.navigator.userAgent.toLowerCase().indexOf('android');
     if( window.navigator.userAgent.toLowerCase().indexOf('android') > -1 )
     {
 	$('h1,h2').css({'-webkit-mask':'none'});
