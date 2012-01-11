@@ -16,7 +16,9 @@ function init(){
 
 $(function(){
     if( window.navigator.userAgent.toLowerCase().indexOf('android') > -1 )
+    {
 	$('h1,h2').css({'-webkit-mask':'none'});
+    }
 });
 
 if (window.addEventListener) { window.addEventListener("load", init, false); }
