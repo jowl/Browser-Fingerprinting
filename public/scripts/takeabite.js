@@ -62,10 +62,10 @@ function onFinish()
         },
 	function success()
         {
+	    $('#cookie').attr('src','/img/cookie_eaten.png');
 	    $('#loading').fadeToggle('fast',function(){
 		$('#thanks').fadeToggle('fast');
 	    });
-	    $('#cookie').attr('src','/img/cookie_eaten.png');
 	    /* show thank you message here */
         }
     );
