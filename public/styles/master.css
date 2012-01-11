@@ -104,6 +104,8 @@ p {
 
 #share {
   color: #fff;
+  behavior: url(/styles/border-radius.htc);
+  border-radius: 4px;
 }
 
 #share:hover {
