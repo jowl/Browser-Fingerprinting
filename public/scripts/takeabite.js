@@ -24,14 +24,10 @@ var statusTimeout;
 
 function submit()
 {
-    var tmp = 0;
     /* hide button and show loading bar here */
-    $('#share,#loading').fadeToggle('fast',function(){
-	if( tmp > 0 )
-	{
-	    statusTimeout = setTimeout(onFinish,10000);
-	    Fingerprint.onFinish(onFinish);
-	}else tmp++;
+    $('#share,#loading').fadeToggle('fast').promise().done(function(){
+	statusTimeout = setTimeout(onFinish,10000);
+	Fingerprint.onFinish(onFinish);
     });
 
 }
