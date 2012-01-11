@@ -49,7 +49,7 @@
             <img src="img/cookie.png" border="0" alt="Take a Bite!" id="cookie" width="816" height="369" />
           </div>
 
-          <div class="span14" id="sharediv" style="height:100px;position:relative;">
+          <div class="span14" id="sharediv" style="height:200px;position:relative;">
 
             <a href="#" onclick="submit();return false;" class="btn primary" id="share">Sure, I'll have a bite!</a>
 
@@ -63,13 +63,19 @@
 	    </div>
 
 	    <div id="thanks" style="display:none;position:absolute;z-index:3;top:0;left:0;width:100%;">
-	      <h2 style="position:relative;z-index:3;">Thank you!</h2>
-	      <p style="position:relative;z-index:3;">
+	      <h2>Thank you!</h2>
+	      <p>
 		Thanks to your bite of the cookie, we are now one step closer to
 		a cookie-free browsing experience! <br />We need recurring
 		visitors, so please return to us in a few days to take another
 		bite.
 	      </p>
+	      <form action="http://tinyletter.com/take-a-bite" method="post" target="popupwindow" onsubmit="window.open('http://tinyletter.com/take-a-bite', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true" style="margin-top:20px">
+		<p style="font-weight:bold">If you want a friendly reminder to take another bite, please enter your email address:</p>
+		<p><input type="text" style="width:300px; height: 32px; font-family: museo, helvetica, sans-serif; font-size:16px" name="emailaddress"/>
+		<input type="hidden" value="1" name="embed" />
+		<input type="submit" class="btn" value="Remind me" style="display:inline; font-family: museo, helvetica, sans-serif; font-size:16px; padding: 6px; color: #fff; margin-left: 1em"/></p>
+	      </form>
 	    </div>
 
           </div>
