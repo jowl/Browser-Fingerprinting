@@ -52,6 +52,10 @@ h2 {
   text-align: center;   
 }
 
+img {
+    border-style: none;
+}
+
 p {
   font-size: 16px;
   text-align: center;
@@ -95,6 +99,7 @@ p {
 .btn:hover {
     background-position: 0 0;
     opacity: 0.9;
+    filter: alpha(opacity=90);
 }
 .span14 > p {
   width: 816px;
@@ -113,6 +118,7 @@ p {
 
 .add-info {
   font-size:12px;
+  padding: 0 8%;
 }
 
 table.share tr td { border-width: 0px; text-align: center; width: 140px; padding: 0;}
