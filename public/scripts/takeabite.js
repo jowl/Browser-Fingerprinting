@@ -13,10 +13,11 @@ function init(){
                       .run();
 
 }
-
+/*
 if (window.addEventListener) { window.addEventListener("load", init, false); }
 else if (window.attachEvent) { window.attachEvent("onload",init); }
-
+else window.onload = init;
+*/
 
 /** Functions *****************************************************************/
 
@@ -53,7 +54,7 @@ function onFinish()
 	    setTimeout(function(){
 		$('#thanks,#loading').fadeToggle('fast');
 		$('#cookie').attr('src','/img/cookie_eaten.png');
-	    },1000);
+	    },500);
 	    /* show thank you message here */
         }
     );
