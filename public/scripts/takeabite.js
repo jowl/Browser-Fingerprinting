@@ -38,7 +38,8 @@ function onFinish()
     Fingerprint.onFinish = function() {};
     Fingerprint.status.onChange = function() {};
 
-    try{ Fingerprint.updateCSSFonts(cssFontList); }catch(e) {}
+    try{ Fingerprint.updateCSSFonts(cssFontList); }
+    catch(e) {}
 
     $('#status').text('Sending data...');
     Fingerprint.submit(
