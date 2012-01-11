@@ -12,9 +12,8 @@ function init(){
 	              .add(Fingerprint.updateRTT,[10,'/time'])
 	              .run();
 
-    alert(window.navigator.userAgent.toLowerCase());
-    if( window.navigator.userAgent.toLowerCase().indexOf('android') > -1 )
-	$('h1,h2').css('-webkit-mask','');
+//    if( window.navigator.userAgent.toLowerCase().indexOf('android') > -1 )
+    $('h1,h2').css({'-webkit-mask':''});
 
 }
 
