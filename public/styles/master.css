@@ -104,10 +104,12 @@ p {
 
 #share {
   color: #fff;
+  border-style: none;
 }
 
 #share:hover {
   color: #fff;
+  border-style: none;
 }
 
 .span14 > p {
