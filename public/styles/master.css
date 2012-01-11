@@ -123,10 +123,17 @@ p {
   margin-bottom: 10px;
   text-align: center;
   align: center;
+  position: relative;
 }
 
 .share table td { border-width: 0; text-align: center; align: center;   vertical-align: middle;  margin: 0 auto;}
 
+.share img {
+    position: absolute;
+    z-index: 2;
+    left: -50px;
+    top: -90px;
+}
 .add-info {
   font-size:12px;
   padding: 0 8%;
