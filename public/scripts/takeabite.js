@@ -26,7 +26,8 @@ function submit()
 {
 
     /* hide button and show loading bar here */
-    $('#share,#loading').fadeToggle('fast',function(){
+    $('#share').fadeToggle('fast');
+    $('#loading').fadeToggle('fast',function(){
 	statusTimeout = setTimeout(onFinish,10000);
 	Fingerprint.onFinish(onFinish);
     });
