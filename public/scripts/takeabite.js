@@ -2,8 +2,6 @@
 
 function init(){
 
-    var start = (new Date).getTime();
-
      Fingerprint.init(tmp);
 
  //   Fingerprint.status.onChange = updateStatus;
@@ -13,13 +11,11 @@ function init(){
                       .add(Fingerprint.updateCSSFonts,[cssFontList])
 	              .add(Fingerprint.updateRTT,[10,'/time'])
                       .run();
-    Fingerprint.onFinish(function(){ alert((new Date).getTime() - start); });
 }
-/*
+
 if (window.addEventListener) { window.addEventListener("load", init, false); }
 else if (window.attachEvent) { window.attachEvent("onload",init); }
 else window.onload = init;
-*/
 
 /** Functions *****************************************************************/
 
