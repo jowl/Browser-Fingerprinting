@@ -380,14 +380,22 @@ var Fingerprint = (function()
 	    var span = $('<span>').text('abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz')
 		.css('fontFamily','non-existing-font');
 	    $(div).append(span);
-	    var width = $(span).width();
-	    var height = $(span).height();
+	    var width = span.style.offsetWidth; //$(span).width();
+	    var height = span.style.offsetHeight; //$(span).height();
+
+
+	    var checkFont = function(font)
+	    {
+//		$(span).css('fontFamily', font);
+		span.style.fontFamily = font;
+//		if ( $(span).width() !== width || $(span).height() !== height )
+		if ( span.style.offsetWidth !== width || span.style.offsetHeight !== height )
+		    fingerprint.fonts.css.push(font);
+	    };
+
 	    for( var i in fontList )
 	    {
-		var font = fontList[i];
-		$(span).css('fontFamily', font); 
-		if ( $(span).width() !== width || $(span).height() !== height )
-		    fingerprint.fonts.css.push(font);
+		checkFont(fontList[i]);
 	    }
 	    
 	    $(div).remove();
