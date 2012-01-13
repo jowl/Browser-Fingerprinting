@@ -89,17 +89,26 @@ class Server < Sinatra::Base
 
   # Get dataset
   get %r{/dataset(\.json)?} do |json|
-    if json
-      db = Mongo::Connection.new.db('fingerprints')
-      collection = db.collection('fingerprints')
-      
-      fields = params.keys.reject { |x| x == 'captures' }
 
-      response.body = collection.find({}, { :fields => fields, :sort => 'uid'}).to_json
+    db = Mongo::Connection.new.db('fingerprints')
+    collection = db.collection('fingerprints')
+    
+    if json      
+      fields = {}
+      params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' }
+      
+      p fields
+
+      if fields.count > 0 
+        response.body = collection.find({}, { :fields => fields, :sort => 'timestamp'}).to_json
+      else
+        response.body = collection.find({}, { :sort => 'timestamp'}).to_json
+      end
           
       response.finish
     else
-      File.read(File.join('public', 'dataset.htm'))
+      @sample = collection.find_one({},{ :fields => {'_id' => 0 }, :sort => ['timestamp',:descending], :limit => 1} )
+      erb :dataset
     end
 
   end

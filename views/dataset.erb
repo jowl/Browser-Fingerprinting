@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      #attrs ul { list-style: none; margin-left: 0px; }
+      #attrs ul ul { list-style: none; margin-left: 15px; }
+      .sisdebar { border-right: 1px solid #999; padding-right: 25px; }
+    </style>
+    <script src="/scripts/ext/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <script src="/scripts/ext/jquery.json-2.3.min.js" type="text/javascript"></script>
+    <script src="/scripts/ext/jquery.tablesorter.min.js" type="text/javascript"></script>
+    <script src="/scripts/dataset.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(function(){
+        var tmp = <%= @sample.to_json %>;
+        $('#attrs').append(get_all_attrs(tmp));
+        $('#get').click(function(){
+          var attrs = { '_id' : 0 };
+          $('#attrs').find('input:checked').each(function(){ attrs[this.value] = 1; });
+          $.getJSON(
+            '/dataset.json',
+            attrs,
+            update_datatable(attrs)
+          );
+        });
+      });
+    </script>
+    <title>Browser Fingerprinting</title>
+  </head>
+<body>
+  <div class="container-fluid">
+    <div class="sidebar">
+      <h3>Attributes</h3>
+      <div id="attrs"></div>
+      <a class="btn" style="margin: 20px auto;display:block;text-align:center" id="get">Get data</a>
+    </div>
+    <div class="content" style="padding-right:20px;padding-left: 20px;">
+      <h3>Data</h3>
+      <table id="data" class="zebra-striped condensed-table">
+      </table>
+    </div>
+  </div>
+</body>
+</html>
