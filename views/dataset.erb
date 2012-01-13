@@ -17,7 +17,7 @@
         var tmp = <%= @sample.to_json %>;
         $('#attrs').append(get_all_attrs(tmp));
         $('#get').click(function(){
-          var attrs = { '_id' : 0 };
+          var attrs = { };
           $('#attrs').find('input:checked').each(function(){ attrs[this.value] = 1; });
           $('#pacman').fadeIn('fast');
           $.getJSON(

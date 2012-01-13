@@ -94,11 +94,11 @@ class Server < Sinatra::Base
     collection = db.collection('fingerprints')
     
     if json      
-      fields = {}
+      fields = { '_id' => 0 }
 
       params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' and k != 'ip' }
 
-      if fields.count > 0 
+      if fields.count > 1
         response.body = collection.find({}, { :fields => fields, :sort => 'timestamp'}).to_json
       else
         response.body = collection.find({}, { :fields => { '_id' => 0, 'ip' => 0 }, :sort => 'timestamp'}).to_json
