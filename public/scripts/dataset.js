@@ -90,9 +90,12 @@ function update_datatable(attrs)
 
     return function(data)
     {
-	var table = $('#data');
 
-	table.children().remove();
+	$('#data').empty();
+
+	var table = $('<table>');
+
+	table.empty();
 	var tr = $('<tr>').append($('<th>').text('#'));
 
 	for ( var a in attrs )
@@ -147,6 +150,9 @@ function update_datatable(attrs)
 	table.append(tbody);
 	table.tablesorter({ sortList : [[0,0]] })
 	    .tablesorterFilter({ filterContainer : '#filter' });
+
+	$('#data').append(table);
+
 	$('#pacman').fadeOut('fast');
     };
 }
