@@ -142,3 +142,8 @@ p {
 }
 
 table.share tr td { border-width: 0px; text-align: center; width: 140px; padding: 0;}
+
+.modal-header h2 { font-family: museo, helvetica, sans-serif }
+.modal-body p, .modal-body { text-align:justify }
+
+#modal-from-dom { max-height: 700px; width: 650px; top:50%; margin: -350px 0px 0px -280px }

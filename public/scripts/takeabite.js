@@ -19,6 +19,7 @@ $(function(){
     {
 	$('h1,h2').css({'-webkit-mask':'none'});
     }
+
 });
 
 if (window.addEventListener) { window.addEventListener("load", init, false); }
@@ -28,7 +29,9 @@ else window.onload = init;
 /** Functions *****************************************************************/
 
 var statusTimeout;
-
+function test() {
+    return  'More information';
+}
 function submit()
 {
     /* hide button and show loading bar here */
