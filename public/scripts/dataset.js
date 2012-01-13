@@ -148,6 +148,7 @@ function update_datatable(attrs)
 	    tbody.append(tr);
 	}
 	table.append(tbody);
+	$('#filter').unbind();
 	table.tablesorter({ sortList : [[0,0]] })
 	    .tablesorterFilter({ filterContainer : '#filter' });
 
