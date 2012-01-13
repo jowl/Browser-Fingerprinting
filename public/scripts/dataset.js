@@ -11,7 +11,10 @@ function get_all_attrs(obj,parent)
 	var attr = $('<li>');
 	if ( typeof obj[k] === 'object' && !(obj[k] instanceof Date) && !(obj[k] instanceof Array) )
 	{
-	    attr.html('<b>' + k + '</b>');
+	    attr.html($('<b>').text(k).css('cursor','pointer').click(function(){
+		var inputs = $(this).siblings('ul').find('input:checkbox');
+		inputs.attr('checked',inputs.filter(':checked').length === 0);
+	    }));
 	    attr.append(get_all_attrs(obj[k],qname));
 	}
 	else
@@ -44,6 +47,47 @@ function get_all_attrs(obj,parent)
 
 function update_datatable(attrs)
 {
+    var show_rtts = function(rtts)
+    {
+	var sum = 0;
+	for ( var i in rtts )
+	    sum += rtts[i];
+	return sum / rtts.length + "ms";
+    };
+
+    var show_accepts = function(accepts)
+    {
+	var res = '';
+	for ( var i in accepts )
+	{
+	    res += accepts[i].name+';'+accepts[i].qvalue+',';
+	}
+	return res.substr(0,res.length-1);
+    };
+    
+    var show_timestamp = function(timestamp)
+    {
+	try
+	{
+	    var date = new Date(timestamp);
+	    var y = date.getFullYear();
+	    var m = ('0'+date.getMonth()).slice(-2);
+	    var d = ('0'+date.getDate()).slice(-2);
+	    var h = ('0'+date.getHours()).slice(-2);
+	    var n = ('0'+date.getMinutes()).slice(-2);
+	    var s = ('0'+date.getSeconds()).slice(-2);
+	    return y+'-'+m+'-'+d+' '+h+':'+n+':'+s;
+	}
+	catch(e) { return timestamp.toString(); }
+    }
+
+    var show_timezone = function(timezone)
+    {
+	var tz = -timezone/60 + '';
+	if ( tz.indexOf('-') < 0 ) tz = '+' + tz;
+	return 'GMT'+tz;
+    };
+
     return function(data)
     {
 	var table = $('#data');
@@ -67,18 +111,35 @@ function update_datatable(attrs)
 	    {
 		if ( attrs[a] )
 		{
-		    var tmp = data[i];
+		    var val = data[i];
 		    var fields = a.split('.');
 		    for ( var j in fields )
 		    {
-			if ( tmp !== undefined )
-			    tmp = tmp[fields[j]];
+			if ( val !== undefined )
+			    val = val[fields[j]];
 		    }
-		    if ( tmp === undefined )
-			tmp = 'undefined';
-		    else if ( tmp instanceof Array )
-			tmp = tmp.length;
-		    tr.append($('<td>').text(tmp.toString()));
+
+		    // make value more readable
+		    if ( val === undefined )
+			val = 'undefined';
+		    else if ( val instanceof Array )
+		    {
+			if ( a == 'rtts' )
+			    val = show_rtts(val);
+			else if ( a.indexOf('accept.') > -1 )
+			    val = show_accepts(val);
+			else
+			    val = val.length;
+		    }
+		    else if ( a == 'timestamp' )
+			val = show_timestamp(val);
+		    else if ( a == 'timezone' )
+			val = show_timezone(val);
+		    else
+			val = val.toString();
+
+		    tr.append($('<td>').text(val));
+
 		}
 	    }
 	    tbody.append(tr);

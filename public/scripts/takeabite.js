@@ -61,7 +61,7 @@ function onFinish()
 	},
 	function success()
 	{
-	    $('#cookie').attr('src','/img/cookie_eaten.png');
+	    $('#cookie').attr('src','/img/cookie_eaten.gif');
 	    $('#loading').fadeToggle('fast',function(){
 		$('#thanks').fadeToggle('fast');
 	    });
