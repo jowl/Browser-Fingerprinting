@@ -97,12 +97,10 @@ class Server < Sinatra::Base
       fields = {}
       params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' && k != 'ip' }
       
-      p fields
-
       if fields.count > 0 
         response.body = collection.find({}, { :fields => fields, :sort => 'timestamp'}).to_json
       else
-        response.body = collection.find({}, { :sort => 'timestamp'}).to_json
+        response.body = collection.find({}, { :fields => { '_id' => 0, 'ip' => 0 }, :sort => 'timestamp'}).to_json
       end
           
       response.finish

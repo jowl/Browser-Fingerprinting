@@ -49,7 +49,7 @@ function update_datatable(attrs)
 	var table = $('#data');
 
 	table.children().remove();
-	var tr = $('<tr>');
+	var tr = $('<tr>').append($('<th>').text('#'));
 
 	for ( var a in attrs )
 	{
@@ -62,7 +62,7 @@ function update_datatable(attrs)
 	var tbody = $('<tbody>');
 	for ( var i in data )
 	{
-	    tr = $('<tr>');
+	    tr = $('<tr>').append($('<td>').text(parseInt(i)+1));
 	    for ( var a in attrs )
 	    {
 		if ( attrs[a] )
