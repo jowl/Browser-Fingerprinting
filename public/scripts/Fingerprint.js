@@ -95,7 +95,7 @@ var Fingerprint = (function()
 		    };
 	    }
 
-	    if ( window === 'object' )
+	    if ( typeof window === 'object' )
 	    {
 		fingerprint.window =
 		    {
