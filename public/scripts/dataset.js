@@ -85,5 +85,6 @@ function update_datatable(attrs)
 	}
 	table.append(tbody);
 	table.tablesorter();
+	$('#pacman').fadeOut('fast');
     };
 }
