@@ -95,7 +95,7 @@ class Server < Sinatra::Base
     
     if json      
       fields = {}
-      params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' }
+      params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' && k != 'ip' }
       
       p fields
 
