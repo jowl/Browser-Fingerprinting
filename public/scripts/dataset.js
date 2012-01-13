@@ -145,7 +145,8 @@ function update_datatable(attrs)
 	    tbody.append(tr);
 	}
 	table.append(tbody);
-	table.tablesorter();
+	table.tablesorter({ sortList : [[0,0]] })
+	    .tablesorterFilter({ filterContainer : '#filter' });
 	$('#pacman').fadeOut('fast');
     };
 }
