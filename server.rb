@@ -88,29 +88,29 @@ class Server < Sinatra::Base
   end
 
   # Get dataset
-  get %r{/dataset(\.json)?} do |json|
-
-    db = Mongo::Connection.new.db('fingerprints')
-    collection = db.collection('fingerprints')
-    
-    if json      
-      fields = { '_id' => 0 }
-
-      params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' and k != 'ip' }
-
-      if fields.count > 1
-        response.body = collection.find({}, { :fields => fields, :sort => 'timestamp'}).to_json
-      else
-        response.body = collection.find({}, { :fields => { '_id' => 0, 'ip' => 0 }, :sort => 'timestamp'}).to_json
-      end
-          
-      response.finish
-    else
-      @sample = collection.find_one({},{ :fields => {'_id' => 0 }, :sort => ['timestamp',:descending], :limit => 1} )
-      erb :dataset
-    end
-
-  end
+#  get %r{/dataset(\.json)?} do |json|
+#
+#    db = Mongo::Connection.new.db('fingerprints')
+#    collection = db.collection('fingerprints')
+#    
+#    if json      
+#      fields = { '_id' => 0 }
+#
+#      params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' and k != 'ip' }
+#
+#      if fields.count > 1
+#        response.body = collection.find({}, { :fields => fields, :sort => 'timestamp'}).to_json
+#      else
+#        response.body = collection.find({}, { :fields => { '_id' => 0, 'ip' => 0 }, :sort => 'timestamp'}).to_json
+#      end
+#          
+#      response.finish
+#    else
+#      @sample = collection.find_one({},{ :fields => {'_id' => 0 }, :sort => ['timestamp',:descending], :limit => 1} )
+#      erb :dataset
+#    end
+#
+#  end
 
   get '/info' do
     accept = env['rack-accept.request']
