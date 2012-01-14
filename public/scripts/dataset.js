@@ -88,6 +88,11 @@ function update_datatable(attrs)
 	return 'GMT'+tz;
     };
 
+    var set_filterInfo = function(visible,total)
+    {
+	$('#filter-info').text('Displaying ' + visible + ' of ' + total);
+    };
+
     return function(data)
     {
 
@@ -150,7 +155,13 @@ function update_datatable(attrs)
 	table.append(tbody);
 	$('#filter').unbind();
 	table.tablesorter({ sortList : [[0,0]] })
-	    .tablesorterFilter({ filterContainer : '#filter' });
+	    .tablesorterFilter({ filterContainer : '#filter' })
+	    .bind('filterEnd',function(){
+		var count = table.children('tbody').find('tr:visible').length;
+		set_filterInfo(count, data.length);
+	    });
+
+	set_filterInfo(data.length,data.length);
 
 	$('#data').append(table);
 
