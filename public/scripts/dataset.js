@@ -71,7 +71,7 @@ function update_datatable(attrs)
 	{
 	    var date = new Date(timestamp);
 	    var y = date.getFullYear();
-	    var m = ('0'+date.getMonth()).slice(-2);
+	    var m = ('0'+(date.getMonth()+1)).slice(-2);
 	    var d = ('0'+date.getDate()).slice(-2);
 	    var h = ('0'+date.getHours()).slice(-2);
 	    var n = ('0'+date.getMinutes()).slice(-2);
