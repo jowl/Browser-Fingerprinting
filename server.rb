@@ -14,6 +14,21 @@ class Server < Sinatra::Base
 
   use Rack::Accept
 
+  helpers do
+    def protected!
+      unless authorized?
+        response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+        throw(:halt, [401, "Not authorized\n"])
+      end
+    end
+    
+    def authorized?
+      credentials = File.read('top_secret').split('=')
+      @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+      @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == credentials
+    end
+  end
+
   # Get index.htm
   get %r{/(en|sv)?$} do |lang|
     @fingerprint = {}
@@ -57,8 +72,6 @@ class Server < Sinatra::Base
       @fingerprint['accept']['media_type'].push({'name' => typ,'qvalue' => accept.media_type.qvalue(typ)})
     end 
 
-    @language = lang
-    @translations = Lang.getLang(lang)
     erb :index
   end
   
@@ -88,29 +101,31 @@ class Server < Sinatra::Base
   end
 
   # Get dataset
-#  get %r{/dataset(\.json)?} do |json|
-#
-#    db = Mongo::Connection.new.db('fingerprints')
-#    collection = db.collection('fingerprints')
-#    
-#    if json      
-#      fields = { '_id' => 0 }
-#
-#      params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' and k != 'ip' }
-#
-#      if fields.count > 1
-#        response.body = collection.find({}, { :fields => fields, :sort => 'timestamp'}).to_json
-#      else
-#        response.body = collection.find({}, { :fields => { '_id' => 0, 'ip' => 0 }, :sort => 'timestamp'}).to_json
-#      end
-#          
-#      response.finish
-#    else
-#      @sample = collection.find_one({},{ :fields => {'_id' => 0 }, :sort => ['timestamp',:descending], :limit => 1} )
-#      erb :dataset
-#    end
-#
-#  end
+  get %r{/dataset(\.json)?} do |json|
+
+    protected!
+
+    db = Mongo::Connection.new.db('fingerprints')
+    collection = db.collection('fingerprints')
+    
+    if json      
+      fields = { '_id' => 0 }
+
+      params.each_pair { |k,v| fields[k] = v.to_i if k != 'captures' }
+
+      if fields.count > 1
+        response.body = collection.find({}, { :fields => fields, :sort => 'timestamp'}).to_json
+      else
+        response.body = ([{}] * collection.count()).to_json
+      end
+          
+      response.finish
+    else
+      @sample = collection.find_one({},{ :fields => {'_id' => 0 }, :sort => ['timestamp',:descending], :limit => 1} )
+      erb :dataset
+    end
+
+  end
 
   get '/info' do
     accept = env['rack-accept.request']
