@@ -49,7 +49,7 @@ function onFinish()
     clearTimeout(statusTimeout);
     Fingerprint.onFinish = function() {};
     Fingerprint.status.onChange = function() {};
-    trackingFinished();
+    trackFinished();
 
     $('#status').text('Sending data...');
     Fingerprint.submit(
