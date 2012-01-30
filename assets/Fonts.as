@@ -11,17 +11,19 @@ package {
     {
         public function Fonts()
         {
-            ExternalInterface.call('Fingerprint.updateFonts', getDeviceFonts());
 
-	    var fingerprint:SharedObject = SharedObject.getLocal('fingerprint');
+	    var fp:SharedObject = SharedObject.getLocal('fpid');
 
-	    if ( fingerprint.data.uid == null )
+	    if ( fp.data.uid == null )
 	    {
-		fingerprint.data.uid = ExternalInterface.call('Fingerprint.getUID');
-                fingerprint.flush();
+		fp.data.uid = ExternalInterface.call('FP.i');
+                fp.flush();
 	    }
 
-	    ExternalInterface.call('Fingerprint.updateUID',fingerprint.data.uid);
+	    ExternalInterface.call('FP.s',fp.data.uid);
+
+    	    ExternalInterface.call('FP.f', getDeviceFonts());
+			
         }
         
         public function getDeviceFonts():Array

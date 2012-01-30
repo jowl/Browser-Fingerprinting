@@ -74,6 +74,10 @@ class Server < Sinatra::Base
 
     erb :index
   end
+
+  get '/fp' do
+    response.finish
+  end
   
   # Post fingerprint
   post '/post' do 
