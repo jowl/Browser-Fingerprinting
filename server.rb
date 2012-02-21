@@ -30,7 +30,7 @@ class Server < Sinatra::Base
   end
 
   # Get index.htm
-  get %r{/(en|sv)?$} do |lang|
+  get %r{/(auto)?$} do |auto|
     @fingerprint = {}
     cookie_value = request.cookies['fingerprint']
     cookie_value ||= random_uid
@@ -72,7 +72,11 @@ class Server < Sinatra::Base
       @fingerprint['accept']['media_type'].push({'name' => typ,'qvalue' => accept.media_type.qvalue(typ)})
     end 
 
-    erb :index
+    if auto
+      erb :auto
+    else
+      erb :index
+    end
   end
 
   get '/fp' do
